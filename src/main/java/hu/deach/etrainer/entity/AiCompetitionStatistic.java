@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "ai_competition_statistic")
+@Table(name = "ai_competition_statistics")
 @IdClass(AiCompetitionStatisticId.class)
 public class AiCompetitionStatistic {
 

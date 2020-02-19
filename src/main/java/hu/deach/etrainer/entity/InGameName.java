@@ -1,11 +1,12 @@
 package hu.deach.etrainer.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
 @Entity
+@Table(name = "in_game_names")
 @IdClass(IgnId.class)
 public class InGameName {
 
