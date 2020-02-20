@@ -20,18 +20,8 @@ public class MainService {
         return "Hello, from DEAC Hackers ETrainer";
     }
 
-    public List<PlayerResponse> findAllPlayer() {
-        List<Player> players = Lists.newArrayList(playerRepository.findAll());
-        List<PlayerResponse> response = new ArrayList<>();
-        for (Player player : players) {
-            PlayerResponse playerResponse = new PlayerResponse();
-            playerResponse.setFirstName(player.getFirstName());
-            playerResponse.setLastName(player.getLastName());
-            playerResponse.setId(player.getId());
-            response.add(playerResponse);
-        }
-
-        return response;
+    public List<Player> findAllPlayer() {
+        return Lists.newArrayList(playerRepository.findAll());
     }
 
 }
