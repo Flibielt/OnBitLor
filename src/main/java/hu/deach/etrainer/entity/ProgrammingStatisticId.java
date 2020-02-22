@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class AiCompetitionStatisticId implements Serializable {
+public class ProgrammingStatisticId implements Serializable {
 
     private Long aiCompetitionId;
 

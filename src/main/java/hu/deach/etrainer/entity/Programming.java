@@ -2,17 +2,15 @@ package hu.deach.etrainer.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "ai_competitions")
-public class AiCompetition {
+@Table(name = "programming")
+public class Programming {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long Id;
 
     @Column(name = "game_id")

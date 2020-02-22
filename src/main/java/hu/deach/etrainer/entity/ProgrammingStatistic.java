@@ -8,12 +8,12 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "ai_competition_statistics")
-@IdClass(AiCompetitionStatisticId.class)
-public class AiCompetitionStatistic {
+@Table(name = "programming_statistics")
+@IdClass(ProgrammingStatisticId.class)
+public class ProgrammingStatistic {
 
     @Id
-    @Column(name = "ai_competition_id")
+    @Column(name = "programming_id")
     private Long aiCompetitionId;
 
     @Id

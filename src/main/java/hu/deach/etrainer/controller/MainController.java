@@ -41,4 +41,14 @@ public class MainController {
     private PlayerDto convertToDto(Player player) {
         return modelMapper.map(player, PlayerDto.class);
     }
+
+    private Player convertToEntity(PlayerDto playerDto) {
+        Player player = modelMapper.map(playerDto, Player.class);
+
+        if (playerDto.getId() != null) {
+            return null;
+        }
+
+        return player;
+    }
 }
