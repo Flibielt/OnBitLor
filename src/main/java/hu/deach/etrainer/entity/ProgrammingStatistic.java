@@ -14,7 +14,7 @@ public class ProgrammingStatistic {
 
     @Id
     @Column(name = "programming_id")
-    private Long aiCompetitionId;
+    private Long programmingId;
 
     @Id
     @Column(name = "player_id")
