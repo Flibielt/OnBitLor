@@ -5,12 +5,14 @@ import hu.deach.etrainer.entity.Player;
 import hu.deach.etrainer.model.ExampleResponse;
 import hu.deach.etrainer.model.PlayerResponse;
 import hu.deach.etrainer.service.MainService;
+import hu.deach.etrainer.service.PlayerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,9 @@ public class MainController {
 
     @Autowired
     private MainService mainService;
+
+    @Autowired
+    private PlayerService playerService;
 
     @Autowired
     ModelMapper modelMapper;
@@ -34,6 +39,13 @@ public class MainController {
     public List<PlayerDto> getAllPlayer() {
         List<Player> players = mainService.findAllPlayer();
         return players.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @RequestMapping("/all_player")
+    public Collection<PlayerDto> getEveryPlayer() {
+        return playerService.findAll().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }

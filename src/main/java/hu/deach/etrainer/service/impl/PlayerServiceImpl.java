@@ -1,11 +1,14 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.PlayerDto;
+import hu.deach.etrainer.entity.Player;
 import hu.deach.etrainer.repository.PlayerRepository;
 import hu.deach.etrainer.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -45,7 +48,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Collection<PlayerDto> findAll() {
-        return null;
+    public ArrayList<Player> findAll() {
+        return Lists.newArrayList(playerRepository.findAll());
     }
 }

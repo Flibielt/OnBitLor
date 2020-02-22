@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class ProgrammingStatisticId implements Serializable {
 
-    private Long aiCompetitionId;
+    private Long programmingId;
 
     private Long playerId;
 
