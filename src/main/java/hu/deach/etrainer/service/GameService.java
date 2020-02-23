@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public interface GameService {
 
-    GameDto save(GameDto gameDto);
+    Boolean save(GameDto gameDto);
 
     Boolean delete(GameDto gameDto);
 
-    GameDto update(GameDto playerDto);
+    Boolean update(GameDto playerDto);
 
-    GameDto findById(GameDto playerDto);
+    GameDto findById(Long id);
 
     GameDto findByName(String name);
 

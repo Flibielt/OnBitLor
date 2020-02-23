@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,27 +24,38 @@ public class GameServiceImpl implements GameService {
     private ModelMapper modelMapper;
 
     @Override
-    public GameDto save(GameDto gameDto) {
-        return null;
+    public Boolean save(GameDto gameDto) {
+        long count = gameRepository.count();
+        System.out.println(convertToEntity(gameDto));
+        Game game = gameRepository.save(convertToEntity(gameDto));
+        return game.getId() != null && count < gameRepository.count();
     }
 
     @Override
     public Boolean delete(GameDto gameDto) {
-        return null;
+        long count = gameRepository.count();
+        gameRepository.delete(Objects.requireNonNull(convertToEntity(gameDto)));
+        return count > gameRepository.count();
     }
 
     @Override
-    public GameDto update(GameDto playerDto) {
-        return null;
+    public Boolean update(GameDto playerDto) {
+        gameRepository.save(Objects.requireNonNull(convertToEntity(playerDto)));
+        return true;
     }
 
     @Override
-    public GameDto findById(GameDto playerDto) {
-        return null;
+    public GameDto findById(Long id) {
+        Optional<Game> game = gameRepository.findById(id);
+        return game.map(this::convertToDto).orElse(null);
     }
 
     @Override
     public GameDto findByName(String name) {
+        Game game = gameRepository.findByName(name);
+        if (game != null) {
+            return convertToDto(game);
+        }
         return null;
     }
 
@@ -58,13 +71,7 @@ public class GameServiceImpl implements GameService {
     }
 
     private Game convertToEntity(GameDto gameDto) {
-        Game game = modelMapper.map(gameDto, Game.class);
-
-        if (gameDto.getId() == null) {
-            return null;
-        }
-
-        return game;
+        return modelMapper.map(gameDto, Game.class);
     }
 
 }

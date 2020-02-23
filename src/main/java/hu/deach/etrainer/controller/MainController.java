@@ -1,14 +1,18 @@
 package hu.deach.etrainer.controller;
 
+import hu.deach.etrainer.dto.GameDto;
 import hu.deach.etrainer.dto.PlayerDto;
 import hu.deach.etrainer.entity.Player;
 import hu.deach.etrainer.model.ExampleResponse;
 import hu.deach.etrainer.model.PlayerResponse;
+import hu.deach.etrainer.service.GameService;
 import hu.deach.etrainer.service.MainService;
 import hu.deach.etrainer.service.PlayerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ public class MainController {
 
     @Autowired
     private PlayerService playerService;
+
+    @Autowired
+    private GameService gameService;
 
     @Autowired
     ModelMapper modelMapper;
@@ -46,6 +53,20 @@ public class MainController {
     @RequestMapping("/all_player")
     public Collection<PlayerDto> getEveryPlayer() {
         return playerService.findAll();
+    }
+
+    @RequestMapping("/games")
+    public List<GameDto> getGames() {
+        return gameService.findAll();
+    }
+
+    @RequestMapping(value = "/save_game", method = RequestMethod.POST)
+    public String saveGame(@RequestBody GameDto gameDto) {
+        boolean success = gameService.save(gameDto);
+        if (success) {
+            return "Game saved!";
+        }
+        return "Game cannot be saved!";
     }
 
     private PlayerDto convertToDto(Player player) {
