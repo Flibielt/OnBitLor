@@ -1,5 +1,6 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.InGameNameDto;
 import hu.deach.etrainer.entity.InGameName;
 import hu.deach.etrainer.repository.IgnRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class InGameServiceImpl implements InGameNameService {
@@ -41,7 +43,9 @@ public class InGameServiceImpl implements InGameNameService {
 
     @Override
     public ArrayList<InGameNameDto> findAll() {
-        return null;
+        return Lists.newArrayList(ignRepository.findAll()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     private InGameNameDto convertToDto(InGameName inGameName) {

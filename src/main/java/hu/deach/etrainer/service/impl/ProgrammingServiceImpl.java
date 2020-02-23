@@ -1,5 +1,6 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.ProgrammingDto;
 import hu.deach.etrainer.entity.Programming;
 import hu.deach.etrainer.repository.ProgrammingRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class ProgrammingServiceImpl implements ProgrammingService {
@@ -46,7 +48,9 @@ public class ProgrammingServiceImpl implements ProgrammingService {
 
     @Override
     public ArrayList<ProgrammingDto> findAll() {
-        return null;
+        return Lists.newArrayList(programmingRepository.findAll()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     private ProgrammingDto convertToDto(Programming programming) {

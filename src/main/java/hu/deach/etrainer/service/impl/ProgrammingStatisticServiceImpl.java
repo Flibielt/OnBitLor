@@ -1,5 +1,6 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.ProgrammingStatisticDto;
 import hu.deach.etrainer.entity.ProgrammingStatistic;
 import hu.deach.etrainer.repository.ProgrammingStatisticRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Service
 public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticService {
@@ -47,7 +49,9 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
 
     @Override
     public ArrayList<ProgrammingStatisticDto> findAll() {
-        return null;
+        return Lists.newArrayList(programmingStatisticRepository.findAll()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     private ProgrammingStatisticDto convertToDto(ProgrammingStatistic programmingStatistic) {

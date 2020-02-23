@@ -1,7 +1,7 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.GameDto;
-import hu.deach.etrainer.dto.PlayerDto;
 import hu.deach.etrainer.entity.Game;
 import hu.deach.etrainer.repository.GameRepository;
 import hu.deach.etrainer.service.GameService;
@@ -9,7 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -46,8 +47,10 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Collection<GameDto> findAll() {
-        return null;
+    public ArrayList<GameDto> findAll() {
+        return Lists.newArrayList(gameRepository.findAll()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     private GameDto convertToDto(Game game) {

@@ -1,5 +1,6 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.RoleDto;
 import hu.deach.etrainer.entity.Role;
 import hu.deach.etrainer.repository.RoleRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -41,7 +43,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public ArrayList<RoleDto> findAll() {
-        return null;
+        return Lists.newArrayList(roleRepository.findAll()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     private RoleDto convertToDto(Role role) {

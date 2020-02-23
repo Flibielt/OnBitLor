@@ -1,5 +1,6 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.PlayerStatisticDto;
 import hu.deach.etrainer.entity.PlayerStatistic;
 import hu.deach.etrainer.repository.PlayerStatisticRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayerStatisticServiceImpl implements PlayerStatisticService {
@@ -51,7 +53,9 @@ public class PlayerStatisticServiceImpl implements PlayerStatisticService {
 
     @Override
     public ArrayList<PlayerStatisticDto> findAll() {
-        return null;
+        return Lists.newArrayList(playerStatisticRepository.findAll()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     private PlayerStatisticDto convertToDto(PlayerStatistic playerStatistic) {
