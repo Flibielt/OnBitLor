@@ -2,7 +2,7 @@ package hu.deach.etrainer.service;
 
 import hu.deach.etrainer.dto.RoleDto;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface RoleService {
 
@@ -14,6 +14,6 @@ public interface RoleService {
 
     RoleDto findById(Long id);
 
-    Collection<RoleDto> findAll();
+    ArrayList<RoleDto> findAll();
 
 }

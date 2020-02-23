@@ -45,9 +45,7 @@ public class MainController {
 
     @RequestMapping("/all_player")
     public Collection<PlayerDto> getEveryPlayer() {
-        return playerService.findAll().stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
+        return playerService.findAll();
     }
 
     private PlayerDto convertToDto(Player player) {

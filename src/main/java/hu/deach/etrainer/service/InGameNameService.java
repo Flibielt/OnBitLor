@@ -2,7 +2,7 @@ package hu.deach.etrainer.service;
 
 import hu.deach.etrainer.dto.InGameNameDto;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface InGameNameService {
 
@@ -14,6 +14,6 @@ public interface InGameNameService {
 
     InGameNameDto findById(Long playerId, Long gameId);
 
-    Collection<InGameNameDto> findAll();
+    ArrayList<InGameNameDto> findAll();
 
 }

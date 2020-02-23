@@ -1,18 +1,23 @@
 package hu.deach.etrainer.service.impl;
 
 import hu.deach.etrainer.dto.ProgrammingDto;
+import hu.deach.etrainer.entity.Programming;
 import hu.deach.etrainer.repository.ProgrammingRepository;
 import hu.deach.etrainer.service.ProgrammingService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 @Service
 public class ProgrammingServiceImpl implements ProgrammingService {
 
     @Autowired
     private ProgrammingRepository programmingRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public ProgrammingDto save(ProgrammingDto programmingDto) {
@@ -35,12 +40,27 @@ public class ProgrammingServiceImpl implements ProgrammingService {
     }
 
     @Override
-    public Collection<ProgrammingDto> findByGameId(Long gameId) {
+    public ArrayList<ProgrammingDto> findByGameId(Long gameId) {
         return null;
     }
 
     @Override
-    public Collection<ProgrammingDto> findAll() {
+    public ArrayList<ProgrammingDto> findAll() {
         return null;
     }
+
+    private ProgrammingDto convertToDto(Programming programming) {
+        return modelMapper.map(programming, ProgrammingDto.class);
+    }
+
+    private Programming convertToEntity(ProgrammingDto programmingDto) {
+        Programming programming = modelMapper.map(programmingDto, Programming.class);
+
+        if (programmingDto.getId() == null) {
+            return null;
+        }
+
+        return programming;
+    }
+
 }

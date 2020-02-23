@@ -2,7 +2,7 @@ package hu.deach.etrainer.service;
 
 import hu.deach.etrainer.dto.PlayerStatisticDto;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface PlayerStatisticService {
 
@@ -14,10 +14,10 @@ public interface PlayerStatisticService {
 
     PlayerStatisticDto findById(Long playerId, Long gameId);
 
-    Collection<PlayerStatisticDto> findByPlayerId(Long playerId);
+    ArrayList<PlayerStatisticDto> findByPlayerId(Long playerId);
 
-    Collection<PlayerStatisticDto> findByGameId(Long gameId);
+    ArrayList<PlayerStatisticDto> findByGameId(Long gameId);
 
-    Collection<PlayerStatisticDto> findAll();
+    ArrayList<PlayerStatisticDto> findAll();
 
 }

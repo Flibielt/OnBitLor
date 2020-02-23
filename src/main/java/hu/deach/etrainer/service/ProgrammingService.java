@@ -2,7 +2,7 @@ package hu.deach.etrainer.service;
 
 import hu.deach.etrainer.dto.ProgrammingDto;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface ProgrammingService {
 
@@ -14,8 +14,8 @@ public interface ProgrammingService {
 
     ProgrammingDto findById(Long id);
 
-    Collection<ProgrammingDto> findByGameId(Long gameId);
+    ArrayList<ProgrammingDto> findByGameId(Long gameId);
 
-    Collection<ProgrammingDto> findAll();
+    ArrayList<ProgrammingDto> findAll();
 
 }

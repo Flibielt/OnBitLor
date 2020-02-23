@@ -1,5 +1,8 @@
 package hu.deach.etrainer.dto;
 
+import lombok.Data;
+
+@Data
 public class InGameNameDto {
 
     private Long playerId;

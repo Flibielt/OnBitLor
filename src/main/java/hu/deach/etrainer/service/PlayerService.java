@@ -4,7 +4,6 @@ import hu.deach.etrainer.dto.PlayerDto;
 import hu.deach.etrainer.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public interface PlayerService {
 
@@ -20,6 +19,6 @@ public interface PlayerService {
 
     PlayerDto findByEmail(String email);
 
-    ArrayList<Player> findAll();
+    ArrayList<PlayerDto> findAll();
 
 }

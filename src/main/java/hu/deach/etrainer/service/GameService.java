@@ -2,7 +2,7 @@ package hu.deach.etrainer.service;
 
 import hu.deach.etrainer.dto.GameDto;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface GameService {
 
@@ -16,5 +16,5 @@ public interface GameService {
 
     GameDto findByName(String name);
 
-    Collection<GameDto> findAll();
+    ArrayList<GameDto> findAll();
 }

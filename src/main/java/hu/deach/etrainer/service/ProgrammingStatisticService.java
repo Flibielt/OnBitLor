@@ -2,7 +2,7 @@ package hu.deach.etrainer.service;
 
 import hu.deach.etrainer.dto.ProgrammingStatisticDto;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
 
 public interface ProgrammingStatisticService {
@@ -15,8 +15,8 @@ public interface ProgrammingStatisticService {
 
     ProgrammingStatisticDto findById(Long programmingId, Long playerId);
 
-    Collection<ProgrammingStatisticDto> findByDate(Date date);
+    ArrayList<ProgrammingStatisticDto> findByDate(Date date);
 
-    Collection<ProgrammingStatisticDto> findAll();
+    ArrayList<ProgrammingStatisticDto> findAll();
 
 }
