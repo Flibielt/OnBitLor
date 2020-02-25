@@ -7,8 +7,8 @@ import java.io.Serializable;
 @Data
 public class IgnId implements Serializable {
 
-    private Long playerId;
+    private Long player;
 
-    private Long gameId;
+    private Long game;
 
 }

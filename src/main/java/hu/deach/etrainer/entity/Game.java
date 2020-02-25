@@ -3,6 +3,7 @@ package hu.deach.etrainer.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,4 +16,13 @@ public class Game {
 
     @Column
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
+    private Set<Programming> programmings;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
+    private Set<InGameName> inGameNames;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
+    private Set<PlayerStatistic> playerStatistics;
 }

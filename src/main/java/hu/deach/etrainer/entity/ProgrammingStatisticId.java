@@ -8,9 +8,9 @@ import java.util.Date;
 @Data
 public class ProgrammingStatisticId implements Serializable {
 
-    private Long programmingId;
+    private Long programming;
 
-    private Long playerId;
+    private Long player;
 
     private Date date;
 }

@@ -3,6 +3,7 @@ package hu.deach.etrainer.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -28,6 +29,17 @@ public class Player {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role_id")
-    private Long roleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role roleId;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
+    private Set<InGameName> inGameNames;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
+    private Set<ProgrammingStatistic> programmingStatistic;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
+    private Set<PlayerStatistic> playerStatistics;
+
 }

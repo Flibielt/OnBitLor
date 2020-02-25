@@ -12,13 +12,14 @@ import java.util.Date;
 @IdClass(ProgrammingStatisticId.class)
 public class ProgrammingStatistic {
 
+    /*
     @Id
     @Column(name = "programming_id")
     private Long programmingId;
 
     @Id
     @Column(name = "player_id")
-    private Long playerId;
+    private Long playerId;*/
 
     @Column
     private Date date;
@@ -28,5 +29,15 @@ public class ProgrammingStatistic {
 
     @Column
     private Integer score;
+
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "programming_id")
+    private Programming programming;
+
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
 }

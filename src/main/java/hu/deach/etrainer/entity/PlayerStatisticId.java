@@ -8,9 +8,9 @@ import java.util.Date;
 @Data
 public class PlayerStatisticId implements Serializable {
 
-    private Long playerId;
+    private Long player;
 
-    private Long gameId;
+    private Long game;
 
     private Date fromDate;
 }

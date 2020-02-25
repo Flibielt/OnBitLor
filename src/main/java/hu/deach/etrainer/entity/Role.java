@@ -3,6 +3,7 @@ package hu.deach.etrainer.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,4 +16,7 @@ public class Role {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "roleId", cascade = CascadeType.ALL)
+    private Set<Player> players;
 }
