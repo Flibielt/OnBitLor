@@ -49,10 +49,12 @@ public class ProgrammingServiceImpl implements ProgrammingService {
         return programming.map(this::convertToDto).orElse(null);
     }
 
-    //todo: create query
     @Override
     public ArrayList<ProgrammingDto> findByGameId(Long gameId) {
-        return null;
+        ArrayList<Programming> programmings = programmingRepository.findAllByGame(gameId);
+        return programmings.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     @Override
