@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,23 +24,30 @@ public class PlayerServiceImpl implements PlayerService {
     private ModelMapper modelMapper;
 
     @Override
-    public PlayerDto save(PlayerDto playerDto) {
-        return null;
+    public Boolean save(PlayerDto playerDto) {
+        long count = playerRepository.count();
+        Player player = playerRepository.save(Objects.requireNonNull(convertToEntity(playerDto)));
+        return player.getId() != null && count < playerRepository.count();
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        long count = playerRepository.count();
+        playerRepository.deleteById(id);
+        return count > playerRepository.count();
     }
 
     @Override
-    public PlayerDto update(PlayerDto playerDto) {
-        return null;
+    public Boolean update(PlayerDto playerDto) {
+        playerRepository.save(Objects.requireNonNull(convertToEntity(playerDto)));
+        Optional<Player> updated = playerRepository.findById(playerDto.getId());
+        return updated.filter(player -> convertToDto(player).equals(playerDto)).isPresent();
     }
 
     @Override
     public PlayerDto findById(Long id) {
-        return null;
+        Optional<Player> player = playerRepository.findById(id);
+        return player.map(this::convertToDto).orElse(null);
     }
 
     @Override

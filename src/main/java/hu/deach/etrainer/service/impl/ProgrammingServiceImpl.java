@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,25 +24,32 @@ public class ProgrammingServiceImpl implements ProgrammingService {
     private ModelMapper modelMapper;
 
     @Override
-    public ProgrammingDto save(ProgrammingDto programmingDto) {
-        return null;
+    public Boolean save(ProgrammingDto programmingDto) {
+        long count = programmingRepository.count();
+        Programming programming = programmingRepository.save(Objects.requireNonNull(convertToEntity(programmingDto)));
+        return count < programmingRepository.count() && programming.getId() != null;
     }
 
     @Override
     public Boolean delete(ProgrammingDto programmingDto) {
-        return null;
+        long count = programmingRepository.count();
+        programmingRepository.deleteById(programmingDto.getId());
+        return count > programmingRepository.count();
     }
 
     @Override
-    public ProgrammingDto update(ProgrammingDto programmingDto) {
-        return null;
+    public Boolean update(ProgrammingDto programmingDto) {
+        Programming updated = programmingRepository.save(Objects.requireNonNull(convertToEntity(programmingDto)));
+        return convertToDto(updated).equals(programmingDto);
     }
 
     @Override
     public ProgrammingDto findById(Long id) {
-        return null;
+        Optional<Programming> programming = programmingRepository.findById(id);
+        return programming.map(this::convertToDto).orElse(null);
     }
 
+    //todo: create query
     @Override
     public ArrayList<ProgrammingDto> findByGameId(Long gameId) {
         return null;

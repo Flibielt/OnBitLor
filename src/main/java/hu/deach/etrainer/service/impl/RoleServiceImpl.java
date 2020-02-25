@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,23 +24,29 @@ public class RoleServiceImpl implements RoleService {
     private ModelMapper modelMapper;
 
     @Override
-    public RoleDto save(RoleDto roleDto) {
-        return null;
+    public Boolean save(RoleDto roleDto) {
+        long count = roleRepository.count();
+        Role role = roleRepository.save(Objects.requireNonNull(convertToEntity(roleDto)));
+        return count < roleRepository.count() && role.getId() != null;
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        long count = roleRepository.count();
+        roleRepository.deleteById(id);
+        return count > roleRepository.count();
     }
 
     @Override
-    public RoleDto update(RoleDto roleDto) {
-        return null;
+    public Boolean update(RoleDto roleDto) {
+        Role updated = roleRepository.save(Objects.requireNonNull(convertToEntity(roleDto)));
+        return convertToDto(updated).equals(roleDto);
     }
 
     @Override
     public RoleDto findById(Long id) {
-        return null;
+        Optional<Role> role = roleRepository.findById(id);
+        return role.map(this::convertToDto).orElse(null);
     }
 
     @Override

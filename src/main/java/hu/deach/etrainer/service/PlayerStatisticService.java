@@ -3,16 +3,17 @@ package hu.deach.etrainer.service;
 import hu.deach.etrainer.dto.PlayerStatisticDto;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface PlayerStatisticService {
 
-    PlayerStatisticDto save(PlayerStatisticDto playerStatisticDto);
+    Boolean save(PlayerStatisticDto playerStatisticDto);
 
-    Boolean delete(Long playerId, Long gameId);
+    Boolean delete(Long playerId, Long gameId, Date fromDate);
 
-    PlayerStatisticDto update(PlayerStatisticDto playerStatisticDto);
+    Boolean update(PlayerStatisticDto playerStatisticDto);
 
-    PlayerStatisticDto findById(Long playerId, Long gameId);
+    PlayerStatisticDto findById(Long playerId, Long gameId, Date fromDate);
 
     ArrayList<PlayerStatisticDto> findByPlayerId(Long playerId);
 

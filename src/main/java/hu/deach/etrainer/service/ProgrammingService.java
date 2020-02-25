@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public interface ProgrammingService {
 
-    ProgrammingDto save(ProgrammingDto programmingDto);
+    Boolean save(ProgrammingDto programmingDto);
 
     Boolean delete(ProgrammingDto programmingDto);
 
-    ProgrammingDto update(ProgrammingDto programmingDto);
+    Boolean update(ProgrammingDto programmingDto);
 
     ProgrammingDto findById(Long id);
 

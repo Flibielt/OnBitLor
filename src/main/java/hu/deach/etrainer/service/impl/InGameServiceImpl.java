@@ -2,6 +2,7 @@ package hu.deach.etrainer.service.impl;
 
 import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.InGameNameDto;
+import hu.deach.etrainer.entity.IgnId;
 import hu.deach.etrainer.entity.InGameName;
 import hu.deach.etrainer.repository.IgnRepository;
 import hu.deach.etrainer.service.InGameNameService;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,23 +25,40 @@ public class InGameServiceImpl implements InGameNameService {
     private ModelMapper modelMapper;
 
     @Override
-    public InGameNameDto save(InGameNameDto inGameNameDto) {
-        return null;
+    public Boolean save(InGameNameDto inGameNameDto) {
+        long count = ignRepository.count();
+        InGameName inGameName = ignRepository.save(Objects.requireNonNull(convertToEntity(inGameNameDto)));
+        return inGameName.getPlayer() != null && count < ignRepository.count();
     }
 
     @Override
     public Boolean delete(Long playerId, Long gameId) {
-        return null;
+        long count = ignRepository.count();
+        IgnId ignId = new IgnId();
+        ignId.setPlayer(playerId);
+        ignId.setGame(gameId);
+        InGameName inGameName = ignRepository.getOne(ignId);
+        ignRepository.delete(inGameName);
+        return count > ignRepository.count();
     }
 
     @Override
-    public InGameNameDto update(InGameNameDto inGameNameDto) {
-        return null;
+    public Boolean update(InGameNameDto inGameNameDto) {
+        ignRepository.save(Objects.requireNonNull(convertToEntity(inGameNameDto)));
+        IgnId ignId = new IgnId();
+        ignId.setPlayer(inGameNameDto.getPlayerId());
+        ignId.setGame(inGameNameDto.getPlayerId());
+        InGameName inGameName = ignRepository.getOne(ignId);
+        return inGameName.getIgn().equals(inGameNameDto.getIgn());
     }
 
     @Override
     public InGameNameDto findById(Long playerId, Long gameId) {
-        return null;
+        IgnId ignId = new IgnId();
+        ignId.setPlayer(playerId);
+        ignId.setGame(gameId);
+        Optional<InGameName> inGameName = ignRepository.findById(ignId);
+        return inGameName.map(this::convertToDto).orElse(null);
     }
 
     @Override

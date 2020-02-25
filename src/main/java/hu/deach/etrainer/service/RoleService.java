@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public interface RoleService {
 
-    RoleDto save(RoleDto roleDto);
+    Boolean save(RoleDto roleDto);
 
     Boolean delete(Long id);
 
-    RoleDto update(RoleDto roleDto);
+    Boolean update(RoleDto roleDto);
 
     RoleDto findById(Long id);
 

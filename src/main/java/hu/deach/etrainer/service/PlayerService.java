@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public interface PlayerService {
 
-    PlayerDto save(PlayerDto playerDto);
+    Boolean save(PlayerDto playerDto);
 
     Boolean delete(Long id);
 
-    PlayerDto update(PlayerDto playerDto);
+    Boolean update(PlayerDto playerDto);
 
     PlayerDto findById(Long id);
 

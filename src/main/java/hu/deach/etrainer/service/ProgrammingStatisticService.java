@@ -7,13 +7,13 @@ import java.util.Date;
 
 public interface ProgrammingStatisticService {
 
-    ProgrammingStatisticDto save(ProgrammingStatisticDto programmingStatisticDto);
+    Boolean save(ProgrammingStatisticDto programmingStatisticDto);
 
-    Boolean delete(Long programmingId, Long playerId);
+    Boolean delete(Long programmingId, Long playerId, Date date);
 
-    ProgrammingStatisticDto update(ProgrammingStatisticDto programmingStatisticDto);
+    Boolean update(ProgrammingStatisticDto programmingStatisticDto);
 
-    ProgrammingStatisticDto findById(Long programmingId, Long playerId);
+    ProgrammingStatisticDto findById(Long programmingId, Long playerId, Date date);
 
     ArrayList<ProgrammingStatisticDto> findByDate(Date date);
 

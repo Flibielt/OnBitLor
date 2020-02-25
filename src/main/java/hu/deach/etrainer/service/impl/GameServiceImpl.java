@@ -26,7 +26,6 @@ public class GameServiceImpl implements GameService {
     @Override
     public Boolean save(GameDto gameDto) {
         long count = gameRepository.count();
-        System.out.println(convertToEntity(gameDto));
         Game game = gameRepository.save(convertToEntity(gameDto));
         return game.getId() != null && count < gameRepository.count();
     }
