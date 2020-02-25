@@ -64,16 +64,20 @@ public class PlayerStatisticServiceImpl implements PlayerStatisticService {
         return updated.map(this::convertToDto).orElse(null);
     }
 
-    //todo: Create query
     @Override
     public ArrayList<PlayerStatisticDto> findByPlayerId(Long playerId) {
-        return null;
+        ArrayList<PlayerStatistic> playerStatistics = playerStatisticRepository.findAllByPlayer(playerId);
+        return playerStatistics.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
-    //todo: create query
     @Override
     public ArrayList<PlayerStatisticDto> findByGameId(Long gameId) {
-        return null;
+        ArrayList<PlayerStatistic> playerStatistics = playerStatisticRepository.findAllByGame(gameId);
+        return playerStatistics.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     @Override
