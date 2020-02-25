@@ -59,13 +59,14 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
         return programmingStatistic.map(this::convertToDto).orElse(null);
     }
 
-    //todo: create query
     @Override
     public ArrayList<ProgrammingStatisticDto> findByDate(Date date) {
-        return null;
+        ArrayList<ProgrammingStatistic> programmingStatistics = programmingStatisticRepository.findAllByDate(date);
+        return programmingStatistics.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
-    //todo: create query
     @Override
     public ArrayList<ProgrammingStatisticDto> findAll() {
         return Lists.newArrayList(programmingStatisticRepository.findAll()).stream()
