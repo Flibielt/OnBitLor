@@ -33,7 +33,7 @@ public class Player {
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "player_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roleId;
+    private Set<Role> roles;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
     private Set<InGameName> inGameNames;
