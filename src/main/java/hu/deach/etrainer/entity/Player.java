@@ -29,9 +29,11 @@ public class Player {
     @Column(name = "password")
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private Role roleId;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "player_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roleId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
     private Set<InGameName> inGameNames;

@@ -3,7 +3,6 @@ package hu.deach.etrainer.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
@@ -11,12 +10,11 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name")
-    private String name;
+    private RoleName name;
 
-    @OneToMany(mappedBy = "roleId", cascade = CascadeType.ALL)
-    private Set<Player> players;
 }
