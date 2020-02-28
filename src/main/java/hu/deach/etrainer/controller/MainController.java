@@ -4,7 +4,6 @@ import hu.deach.etrainer.dto.GameDto;
 import hu.deach.etrainer.dto.PlayerDto;
 import hu.deach.etrainer.entity.Player;
 import hu.deach.etrainer.model.ExampleResponse;
-import hu.deach.etrainer.model.PlayerResponse;
 import hu.deach.etrainer.service.GameService;
 import hu.deach.etrainer.service.MainService;
 import hu.deach.etrainer.service.PlayerService;
@@ -12,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
