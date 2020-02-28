@@ -11,6 +11,8 @@ import hu.deach.etrainer.model.LoginRequest;
 import hu.deach.etrainer.model.SignUpRequest;
 import hu.deach.etrainer.repository.PlayerRepository;
 import hu.deach.etrainer.repository.RoleRepository;
+import hu.deach.etrainer.service.PlayerService;
+import hu.deach.etrainer.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +45,12 @@ public class AuthController {
     RoleRepository roleRepository;
 
     @Autowired
+    PlayerService playerService;
+
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -66,12 +74,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(playerRepository.existsByUsername(signUpRequest.getUsername())) {
+        if(playerService.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        if(playerRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(playerService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }

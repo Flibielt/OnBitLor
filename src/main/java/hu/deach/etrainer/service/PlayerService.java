@@ -1,7 +1,6 @@
 package hu.deach.etrainer.service;
 
 import hu.deach.etrainer.dto.PlayerDto;
-import hu.deach.etrainer.entity.Player;
 
 import java.util.ArrayList;
 
@@ -20,5 +19,9 @@ public interface PlayerService {
     PlayerDto findByEmail(String email);
 
     ArrayList<PlayerDto> findAll();
+
+    Boolean existsByUsername(String username);
+
+    Boolean existsByEmail(String email);
 
 }

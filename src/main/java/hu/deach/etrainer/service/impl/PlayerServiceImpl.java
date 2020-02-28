@@ -66,6 +66,16 @@ public class PlayerServiceImpl implements PlayerService {
                 .map(this::convertToDto).collect(Collectors.toCollection(Lists::newArrayList));
     }
 
+    @Override
+    public Boolean existsByUsername(String username) {
+        return playerRepository.existsByUsername(username);
+    }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return playerRepository.existsByEmail(email);
+    }
+
     private PlayerDto convertToDto(Player player) {
         return modelMapper.map(player, PlayerDto.class);
     }
