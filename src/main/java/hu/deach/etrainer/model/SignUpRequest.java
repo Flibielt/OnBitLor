@@ -11,7 +11,11 @@ public class SignUpRequest {
 
     @NotBlank
     @Size(min = 4, max = 40)
-    private String name;
+    private String firstName;
+
+    @NotBlank
+    @Size(min = 4, max = 40)
+    private String lastName;
 
     @NotBlank
     @Size(min = 3, max = 15)
