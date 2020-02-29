@@ -44,4 +44,7 @@ public class Player {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
     private Set<PlayerStatistic> playerStatistics;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
+    private Set<TestResult> testResults;
+
 }
