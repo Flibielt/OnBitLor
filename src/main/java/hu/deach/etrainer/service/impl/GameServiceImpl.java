@@ -3,6 +3,7 @@ package hu.deach.etrainer.service.impl;
 import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.GameDto;
 import hu.deach.etrainer.entity.Game;
+import hu.deach.etrainer.model.GameRequest;
 import hu.deach.etrainer.repository.GameRepository;
 import hu.deach.etrainer.service.GameService;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,14 @@ public class GameServiceImpl implements GameService {
         long count = gameRepository.count();
         Game game = gameRepository.save(convertToEntity(gameDto));
         return game.getId() != null && count < gameRepository.count();
+    }
+
+    @Override
+    public GameDto save(GameRequest gameRequest) {
+        GameDto gameDto = new GameDto();
+        gameDto.setName(gameRequest.getName());
+        Game game = convertToEntity(gameDto);
+        return convertToDto(gameRepository.save(game));
     }
 
     @Override
