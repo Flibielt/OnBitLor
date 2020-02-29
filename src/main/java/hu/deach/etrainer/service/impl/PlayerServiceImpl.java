@@ -52,12 +52,14 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public PlayerDto findByUsername(String username) {
-        return null;
+        Optional<Player> player = playerRepository.findByUsername(username);
+        return player.map(this::convertToDto).orElse(null);
     }
 
     @Override
     public PlayerDto findByEmail(String email) {
-        return null;
+        Optional<Player> player = playerRepository.findByEmail(email);
+        return player.map(this::convertToDto).orElse(null);
     }
 
     @Override
