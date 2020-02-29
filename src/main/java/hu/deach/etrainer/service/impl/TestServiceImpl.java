@@ -1,46 +1,61 @@
 package hu.deach.etrainer.service.impl;
 
+import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.TestDto;
 import hu.deach.etrainer.entity.Test;
+import hu.deach.etrainer.repository.TestRepository;
 import hu.deach.etrainer.service.TestService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TestServiceImpl implements TestService {
+
+    @Autowired
+    private TestRepository testRepository;
 
     @Autowired
     private ModelMapper modelMapper;
 
     @Override
     public Boolean save(TestDto testDto) {
-        return null;
+        long count = testRepository.count();
+        Test test = testRepository.save(convertToEntity(testDto));
+        return count < testRepository.count() && test.getId() != null;
     }
 
     @Override
     public Boolean delete(TestDto testDto) {
-        return null;
+        long count = testRepository.count();
+        testRepository.delete(convertToEntity(testDto));
+        return count > testRepository.count();
     }
 
     @Override
     public Boolean update(TestDto testDto) {
-        return null;
+        Test test = testRepository.save(convertToEntity(testDto));
+        return convertToDto(test).equals(testDto);
     }
 
     @Override
     public TestDto findById(Long id) {
-        return null;
+        Optional<Test> test = testRepository.findById(id);
+        return test.map(this::convertToDto).orElse(null);
     }
 
     @Override
     public TestDto findByName(String name) {
-        return null;
+        return convertToDto(testRepository.findByName(name));
     }
 
     @Override
     public ArrayList<TestDto> findAll() {
-        return null;
+        return Lists.newArrayList(testRepository.findAll()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     private TestDto convertToDto(Test test) {
