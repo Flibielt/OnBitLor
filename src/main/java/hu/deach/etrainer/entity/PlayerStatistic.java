@@ -11,14 +11,15 @@ import java.util.Date;
 @IdClass(PlayerStatisticId.class)
 public class PlayerStatistic {
 
-    /*
     @Id
-    @Column(name = "player_id")
-    private Long playerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     @Id
-    @Column(name = "game_id")
-    private Long gameId;*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_id")
+    private Game game;
 
     @Id
     @Column(name = "from_date")
@@ -35,15 +36,5 @@ public class PlayerStatistic {
 
     @Column
     private Integer draw;
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
-    private Player player;
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private Game game;
 
 }
