@@ -3,15 +3,18 @@ package hu.deach.etrainer.service.impl;
 import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.TestDto;
 import hu.deach.etrainer.entity.Test;
+import hu.deach.etrainer.model.TestRequest;
 import hu.deach.etrainer.repository.TestRepository;
 import hu.deach.etrainer.service.TestService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class TestServiceImpl implements TestService {
 
     @Autowired
@@ -25,6 +28,14 @@ public class TestServiceImpl implements TestService {
         long count = testRepository.count();
         Test test = testRepository.save(convertToEntity(testDto));
         return count < testRepository.count() && test.getId() != null;
+    }
+
+    @Override
+    public TestDto save(TestRequest request) {
+        TestDto testDto = new TestDto();
+        testDto.setName(request.getName());
+        Test test = convertToEntity(testDto);
+        return convertToDto(testRepository.save(test));
     }
 
     @Override
