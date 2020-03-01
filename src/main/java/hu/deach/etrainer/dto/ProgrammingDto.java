@@ -7,6 +7,6 @@ public class ProgrammingDto {
 
     private Long id;
     private Long gameId;
-    private String game;
+    private String name;
 
 }

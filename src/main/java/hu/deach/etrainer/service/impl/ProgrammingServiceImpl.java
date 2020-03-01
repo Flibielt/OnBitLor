@@ -3,6 +3,7 @@ package hu.deach.etrainer.service.impl;
 import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.ProgrammingDto;
 import hu.deach.etrainer.entity.Programming;
+import hu.deach.etrainer.model.ProgrammingRequest;
 import hu.deach.etrainer.repository.ProgrammingRepository;
 import hu.deach.etrainer.service.ProgrammingService;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,18 @@ public class ProgrammingServiceImpl implements ProgrammingService {
         long count = programmingRepository.count();
         Programming programming = programmingRepository.save(Objects.requireNonNull(convertToEntity(programmingDto)));
         return count < programmingRepository.count() && programming.getId() != null;
+    }
+
+    @Override
+    public ProgrammingDto save(ProgrammingRequest programmingRequest) {
+        ProgrammingDto programmingDto = new ProgrammingDto();
+        programmingDto.setGameId(programmingRequest.getGameId());
+        programmingDto.setName(programmingRequest.getName());
+        Programming programming = convertToEntity(programmingDto);
+        if (programming == null) {
+            return null;
+        }
+        return convertToDto(programmingRepository.save(programming));
     }
 
     @Override
