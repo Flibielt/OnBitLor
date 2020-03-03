@@ -1,6 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from '../logo.svg';
 import './App.css';
+import {
+  Route,
+  withRouter,
+  Switch} from 'react-router-dom'
+
+import { ACCESS_TOKEN } from "../constants";
+
+import { Layout } from "antd";
+const { Content } = Layout;
 
 function App() {
   return (
