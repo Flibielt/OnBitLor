@@ -1,0 +1,37 @@
+.user-details {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.user-summary {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+@media (min-width: 576px) {
+    .user-details {
+        text-align: left;
+        display: table;
+    }
+
+    .user-summary {
+        float: left;
+        text-align: left;
+    }
+
+    .user-summary {
+        padding-top: 0;
+        padding-left: 40px;
+        width: calc(100% - 120px);
+    }
+}
+
+@media (max-width: 768px) {
+    .user-summary .full-name {
+        font-size: 24px;
+    }
+}
+
