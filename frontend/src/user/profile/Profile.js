@@ -72,7 +72,7 @@ class Profile extends Component {
                         <div className="user-profile">
                             <div className="user-details">
                                 <div className="user-summary">
-                                    <div className="first-name">{this.state.user.name}</div>
+                                    <div className="first-name">{this.state.user.firstName}</div>
                                     <div className="username">@{this.state.user.username}</div>
                                 </div>
                             </div>
