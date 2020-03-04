@@ -38,7 +38,7 @@ export function login(loginRequest) {
     });
 }
 
-export function signUp(signUpRequest) {
+export function signup(signUpRequest) {
     return request({
         url: API_BASE_URL + "/auth/signup",
         method: 'POST',

@@ -5,8 +5,9 @@ import {
 } from 'react-router-dom';
 import './AppHeader.css';
 //todo: Create new image for the current project
-import pollIcon from '../poll.svg';
-import { Layout, Menu, Dropdown, Icon } from 'antd';
+import pollIcon from '../logo.svg';
+import { Layout, Menu, Dropdown } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
 const Header = Layout.Header;
 
 class AppHeader extends Component {
@@ -27,7 +28,7 @@ class AppHeader extends Component {
             menuItems = [
                 <Menu.Item key="/">
                     <Link to="/">
-                        <Icon type="home" className="nav-icon" />
+                        <SmileOutlined type="home" className="nav-icon" />
                     </Link>
                 </Menu.Item>,
                 <Menu.Item key="/poll/new">
@@ -98,7 +99,7 @@ function ProfileDropdownMenu(props) {
             trigger={['click']}
             getPopupContainer = { () => document.getElementsByClassName('profile-menu')[0]}>
             <a className="ant-dropdown-link">
-                <Icon type="user" className="nav-icon" style={{marginRight: 0}} /> <Icon type="down" />
+                <SmileOutlined type="user" className="nav-icon" style={{marginRight: 0}} /> <SmileOutlined type="down" />
             </a>
         </Dropdown>
     );

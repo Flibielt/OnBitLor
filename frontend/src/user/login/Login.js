@@ -4,7 +4,8 @@ import './Login.css'
 import { Link } from "react-router-dom";
 import { ACCESS_TOKEN } from "../../constants";
 
-import { Form, Input, Button, Icon, notification } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
 const FormItem = Form.Item;
 
 class Login extends Component {
@@ -62,7 +63,7 @@ class LoginForm extends Component {
                         rules: [{ required: true, message: 'Please input your username or email!' }],
                     })(
                         <Input
-                            prefix={<Icon type="user" />}
+                            prefix={<SmileOutlined type="user" />}
                             size="large"
                             name="usernameOrEmail"
                             placeholder="Username or Email" />
@@ -73,7 +74,7 @@ class LoginForm extends Component {
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
                         <Input
-                            prefix={<Icon type="lock" />}
+                            prefix={<SmileOutlined type="lock" />}
                             size="large"
                             name="password"
                             type="password"

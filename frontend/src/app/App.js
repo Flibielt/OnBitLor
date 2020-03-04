@@ -6,7 +6,16 @@ import {
   withRouter,
   Switch} from 'react-router-dom'
 
+import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from "../constants";
+
+import Login from '../user/login/Login';
+import Signup from '../user/signup/Signup';
+import Profile from '../user/profile/Profile';
+import AppHeader from '../common/AppHeader';
+import NotFound from '../common/NotFound';
+import LoadingIndicator from '../common/LoadingIndicator';
+import PrivateRoute from '../common/PrivateRoute';
 
 import { Layout } from "antd";
 const { Content } = Layout;
