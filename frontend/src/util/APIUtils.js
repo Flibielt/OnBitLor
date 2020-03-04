@@ -66,7 +66,7 @@ export function getCurrentUser() {
     }
 
     return request({
-        url: API_BASE_URL + "/player/me",
+        url: API_BASE_URL + "/player/me", //todo: implement method in backed
         method: 'GET'
     });
 }
