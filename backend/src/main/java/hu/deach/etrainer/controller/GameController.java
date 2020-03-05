@@ -3,7 +3,11 @@ package hu.deach.etrainer.controller;
 import hu.deach.etrainer.dto.GameDto;
 import hu.deach.etrainer.model.ApiResponse;
 import hu.deach.etrainer.model.GameRequest;
+import hu.deach.etrainer.model.JoinedGame;
+import hu.deach.etrainer.security.CurrentUser;
+import hu.deach.etrainer.security.UserPrincipal;
 import hu.deach.etrainer.service.GameService;
+import hu.deach.etrainer.service.InGameNameService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,9 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
+    @Autowired
+    private InGameNameService inGameNameService;
+
     @PostMapping
     public ResponseEntity<?> addGame(@RequestBody GameRequest request) {
         GameDto gameDto = gameService.save(request);
@@ -36,6 +43,11 @@ public class GameController {
     @GetMapping("/all")
     public ArrayList<GameDto> getAllGame() {
         return gameService.findAll();
+    }
+
+    @GetMapping("/joined")
+    public ArrayList<JoinedGame> getJoinedGames(@CurrentUser UserPrincipal currentUser) {
+        return inGameNameService.findByPlayer(currentUser.getId());
     }
 
     @GetMapping("/{gameId}")

@@ -10,15 +10,6 @@ import javax.persistence.*;
 @IdClass(IgnId.class)
 public class InGameName {
 
-    /*
-    @Id
-    @Column(name = "player_id")
-    private Long playerId;
-
-    @Id
-    @Column(name = "game_id")
-    private Long gameId;*/
-
     @Column
     private String ign;
 

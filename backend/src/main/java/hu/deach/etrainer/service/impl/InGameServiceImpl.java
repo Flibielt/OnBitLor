@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.InGameNameDto;
 import hu.deach.etrainer.entity.IgnId;
 import hu.deach.etrainer.entity.InGameName;
+import hu.deach.etrainer.model.JoinedGame;
 import hu.deach.etrainer.repository.IgnRepository;
 import hu.deach.etrainer.service.InGameNameService;
 import org.modelmapper.ModelMapper;
@@ -68,6 +69,13 @@ public class InGameServiceImpl implements InGameNameService {
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
+    @Override
+    public ArrayList<JoinedGame> findByPlayer(Long playerId) {
+        return Lists.newArrayList(ignRepository.findAllByPlayerId(playerId)).stream()
+                .map(this::convertToJoinedGame)
+                .collect(Collectors.toCollection(Lists::newArrayList));
+    }
+
     private InGameNameDto convertToDto(InGameName inGameName) {
         return modelMapper.map(inGameName, InGameNameDto.class);
     }
@@ -80,5 +88,9 @@ public class InGameServiceImpl implements InGameNameService {
         }
 
         return inGameName;
+    }
+
+    private JoinedGame convertToJoinedGame(InGameName inGameName) {
+        return new JoinedGame(inGameName.getGame().getId(), inGameName.getGame().getName(), inGameName.getIgn());
     }
 }
