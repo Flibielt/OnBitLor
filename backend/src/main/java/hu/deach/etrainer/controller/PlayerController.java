@@ -3,6 +3,9 @@ package hu.deach.etrainer.controller;
 import hu.deach.etrainer.dto.PlayerDto;
 import hu.deach.etrainer.exception.ResourceNotFoundException;
 import hu.deach.etrainer.model.PlayerIdentityAvailability;
+import hu.deach.etrainer.model.PlayerSummary;
+import hu.deach.etrainer.security.CurrentUser;
+import hu.deach.etrainer.security.UserPrincipal;
 import hu.deach.etrainer.service.PlayerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,12 @@ public class PlayerController {
 
     @Autowired
     private PlayerService playerService;
+
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('USER')")
+    public PlayerSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
+        return new PlayerSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+    }
 
     @GetMapping("/{username}")
     @PreAuthorize("hasRole('ROLE_USER')")
