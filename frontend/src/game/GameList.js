@@ -89,7 +89,7 @@ class GameList extends Component {
                 {
                     !this.state.isLoading && this.state.polls.length === 0 ? (
                         <div className="no-games-found">
-                            <span>No Polls Found.</span>
+                            <span>No Games Found.</span>
                         </div>
                     ): null
                 }

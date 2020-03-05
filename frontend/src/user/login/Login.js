@@ -1,16 +1,15 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
 import { login } from '../../util/APIUtils';
-import './Login.css'
-import { Link } from "react-router-dom";
-import { ACCESS_TOKEN } from "../../constants";
+import './Login.css';
+import { Link } from 'react-router-dom';
+import { ACCESS_TOKEN } from '../../constants';
 
-import { Form, Input, Button, notification } from 'antd';
-import { SmileOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Icon, notification } from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
     render() {
-        const AntWrappedLoginForm = Form.create()(LoginForm);
+        const AntWrappedLoginForm = Form.create()(LoginForm)
         return (
             <div className="login-container">
                 <h1 className="page-title">Login</h1>
@@ -29,25 +28,25 @@ class LoginForm extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();
+        event.preventDefault();   
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 const loginRequest = Object.assign({}, values);
                 login(loginRequest)
-                    .then(response => {
-                        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                        this.props.onLogin();
-                    }).catch(error => {
+                .then(response => {
+                    localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+                    this.props.onLogin();
+                }).catch(error => {
                     if(error.status === 401) {
                         notification.error({
-                            message: 'Online Bit Calculator App',
+                            message: 'Bit Calculator App',
                             description: 'Your Username or Password is incorrect. Please try again!'
-                        });
+                        });                    
                     } else {
                         notification.error({
-                            message: 'Online Bit Calculator App',
+                            message: 'Bit Calculator App',
                             description: error.message || 'Sorry! Something went wrong. Please try again!'
-                        });
+                        });                                            
                     }
                 });
             }
@@ -62,24 +61,24 @@ class LoginForm extends Component {
                     {getFieldDecorator('usernameOrEmail', {
                         rules: [{ required: true, message: 'Please input your username or email!' }],
                     })(
-                        <Input
-                            prefix={<SmileOutlined type="user" />}
-                            size="large"
-                            name="usernameOrEmail"
-                            placeholder="Username or Email" />
+                    <Input 
+                        prefix={<Icon type="user" />}
+                        size="large"
+                        name="usernameOrEmail" 
+                        placeholder="Username or Email" />    
                     )}
                 </FormItem>
                 <FormItem>
-                    {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <Input
-                            prefix={<SmileOutlined type="lock" />}
-                            size="large"
-                            name="password"
-                            type="password"
-                            placeholder="Password"  />
-                    )}
+                {getFieldDecorator('password', {
+                    rules: [{ required: true, message: 'Please input your Password!' }],
+                })(
+                    <Input 
+                        prefix={<Icon type="lock" />}
+                        size="large"
+                        name="password" 
+                        type="password" 
+                        placeholder="Password"  />                        
+                )}
                 </FormItem>
                 <FormItem>
                     <Button type="primary" htmlType="submit" size="large" className="login-form-button">Login</Button>
@@ -89,5 +88,6 @@ class LoginForm extends Component {
         );
     }
 }
+
 
 export default Login;
