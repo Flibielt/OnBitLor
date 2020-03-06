@@ -87,11 +87,10 @@ class Profile extends Component {
                                     </Avatar>
                                 </div>
                                 <div className="user-summary">
-                                    <div className="full-name">{this.state.user.firstName}</div>
-                                    <LastName lastName={this.state.user.lastName}/>
-                                    <div className="username">@{this.state.user.username}</div>
+                                    <div className="full-name">{this.state.user.firstName} {this.state.user.lastName}</div>
+                                    <div className="username">{this.state.user.username}</div>
                                     <div className="user-joined">
-                                        Joined {formatDate(this.state.user.joinedAt)}
+                                        Bits: {formatDate(this.state.user.bits)}
                                     </div>
                                 </div>
                             </div>
@@ -101,10 +100,13 @@ class Profile extends Component {
                                     tabBarStyle={tabBarStyle}
                                     size="large"
                                     className="profile-tabs">
-                                    <TabPane tab={`${this.state.user.pollCount} Polls`} key="1">
+                                    <TabPane tab={`Games`} key="1">
                                         <PollList username={this.props.match.params.username} type="USER_CREATED_POLLS" />
                                     </TabPane>
-                                    <TabPane tab={`${this.state.user.voteCount} Votes`}  key="2">
+                                    <TabPane tab={`Programming`}  key="2">
+                                        <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />
+                                    </TabPane>
+                                    <TabPane tab={`Tests`}  key="3">
                                         <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />
                                     </TabPane>
                                 </Tabs>
@@ -115,14 +117,6 @@ class Profile extends Component {
             </div>
         );
     }
-}
-
-function LastName(lastName) {
-    if (lastName != null) {
-        console.log(lastName.lastName);
-        return <div className="full-name">{lastName.lastName}</div>;
-    }
-    return null;
 }
 
 export default Profile;
