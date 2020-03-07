@@ -5,7 +5,7 @@ import './NewPoll.css';
 import { Form, Input, Button, Icon, Select, Col, notification } from 'antd';
 const Option = Select.Option;
 const FormItem = Form.Item;
-const { TextArea } = Input
+const { TextArea } = Input;
 
 class NewPoll extends Component {
     constructor(props) {

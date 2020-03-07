@@ -8,6 +8,7 @@ import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
+import ProgrammingList from "../../programming/ProgrammingList";
 
 const TabPane = Tabs.TabPane;
 
@@ -104,7 +105,7 @@ class Profile extends Component {
                                         <PollList username={this.props.match.params.username} type="USER_CREATED_POLLS" />
                                     </TabPane>
                                     <TabPane tab={`Programming`}  key="2">
-                                        <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />
+                                        <ProgrammingList/>
                                     </TabPane>
                                     <TabPane tab={`Tests`}  key="3">
                                         <PollList username={this.props.match.params.username} type="USER_VOTED_POLLS" />

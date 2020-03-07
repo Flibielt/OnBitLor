@@ -1,4 +1,4 @@
-import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
+import {API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, PROGRAMMING_LIST_SIZE} from '../constants';
 
 const request = async (options) => {
     const headers = new Headers({
@@ -19,6 +19,16 @@ const request = async (options) => {
     }
     return json;
 };
+
+export function getAllProgrammings(page, size) {
+    page = page || 0;
+    size = size || PROGRAMMING_LIST_SIZE;
+
+    return request({
+        url: API_BASE_URL + "/programming/all?page=" + page + "&size=" + size,
+        method: 'GET'
+    });
+}
 
 export function getAllPolls(page, size) {
     page = page || 0;
@@ -79,10 +89,10 @@ export function checkEmailAvailability(email) {
 
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
-        console.log("No acces token set.")
+        console.log("No acces token set.");
         return Promise.reject("No access token set.");
     }
-    console.log("Access token set.")
+    console.log("Access token set.");
 
     return request({
         url: API_BASE_URL + "/player/me",
