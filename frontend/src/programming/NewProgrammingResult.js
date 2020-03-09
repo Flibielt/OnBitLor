@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import { getAllGames } from "../util/APIUtils";
-import { Select } from 'antd';
+import {getAllGames, getAllProgrammings} from "../util/APIUtils";
+import {Form, Select} from 'antd';
+import FormItem from "antd/es/form/FormItem";
 const { Option } = Select;
 
 class NewProgrammingResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            games: [],
-            selectedGame: "",
+            programmings: [],
+            selectedProgramming: "",
             validationError: ""
         }
     }
 
     componentDidMount() {
-        getAllGames()
+        getAllProgrammings()
             .then(data => {
-                let gamesFromAPI = data.map(game => {
-                    return { value: game.id, display: game.name};
+                let gamesFromAPI = data.map(programming => {
+                    return { value: programming.id, display: programming.name};
                 });
                 this.setState({
-                    games: [{
+                    programmings: [{
                         value: 0,
-                        display: "(Select a game)"
+                        display: "(Select a programming competition)"
                     }].concat(gamesFromAPI)
                 });
             })
@@ -35,32 +36,43 @@ class NewProgrammingResult extends Component {
         console.log(`selected ${value}`);
         console.log(`Event ${event.id}`);
         this.setState({
-            selectedGame: value
+            selectedProgramming: value
         });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
     }
 
     render() {
         return (
             <div className="programming-container">
                 <h1 className="page-title">New result</h1>
-                <Select
-                    value={this.state.selectedGame}
-                        onSelect={(value, key) => this.handleChange(value, key)}
-                >
-                    {this.state.games.map(game => (
-                        <Option
-                            key = {game.value}
-                            value = {game.display}
-                        >
-                            {game.display}
-                        </Option>
-                    ))}
-                </Select>
-                <div>
-                    {this.state.validationError}
-                </div>
-                <div>
-                    {this.state.selectedGame}
+                <div className="programming-content">
+                    <Form onSubmit={this.handleSubmit} className="create-programming-form">
+                        <FormItem>
+                            <Select
+                                value={this.state.selectedProgramming}
+                                onSelect={(value, key) => this.handleChange(value, key)}
+                            >
+                                {this.state.programmings.map(programming => (
+                                    <Option
+                                        key = {programming.value}
+                                        value = {programming.display}
+                                    >
+                                        {programming.display}
+                                    </Option>
+                                ))}
+                            </Select>
+                            <div>
+                                {this.state.validationError}
+                            </div>
+                            <div>
+                                {this.state.selectedProgramming}
+                            </div>
+                        </FormItem>
+
+                    </Form>
                 </div>
             </div>
         )
