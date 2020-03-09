@@ -11,6 +11,7 @@ import { ACCESS_TOKEN } from '../constants';
 
 import PollList from '../poll/PollList';
 import NewPoll from '../poll/NewPoll';
+import NewProgrammingResult from '../programming/NewProgrammingResult'
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
@@ -111,7 +112,7 @@ class App extends Component {
                 <Route authenticated={this.state.isAuthenticated} path="/users/:username"
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewProgrammingResult} handleLogout={this.handleLogout}></PrivateRoute>
                 <Route component={NotFound}></Route>
               </Switch>
             </div>
