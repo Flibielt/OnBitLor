@@ -3,7 +3,6 @@ package hu.deach.etrainer.service.impl;
 import com.google.common.collect.Lists;
 import hu.deach.etrainer.dto.PlayerStatisticDto;
 import hu.deach.etrainer.entity.PlayerStatistic;
-import hu.deach.etrainer.entity.PlayerStatisticId;
 import hu.deach.etrainer.repository.PlayerStatisticRepository;
 import hu.deach.etrainer.service.PlayerStatisticService;
 import org.modelmapper.ModelMapper;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,34 +31,22 @@ public class PlayerStatisticServiceImpl implements PlayerStatisticService {
     }
 
     @Override
-    public Boolean delete(Long playerId, Long gameId, Date fromDate) {
+    public Boolean delete(Long id) {
         long count = playerStatisticRepository.count();
-        PlayerStatisticId playerStatisticId = new PlayerStatisticId();
-        playerStatisticId.setPlayer(playerId);
-        playerStatisticId.setGame(gameId);
-        playerStatisticId.setFromDate(fromDate);
-        playerStatisticRepository.deleteById(playerStatisticId);
+        playerStatisticRepository.deleteById(id);
         return count > playerStatisticRepository.count();
     }
 
     @Override
     public Boolean update(PlayerStatisticDto playerStatisticDto) {
         playerStatisticRepository.save(Objects.requireNonNull(convertToEntity(playerStatisticDto)));
-        PlayerStatisticId playerStatisticId = new PlayerStatisticId();
-        playerStatisticId.setPlayer(playerStatisticDto.getPlayerId());
-        playerStatisticId.setGame(playerStatisticDto.getGameId());
-        playerStatisticId.setFromDate(playerStatisticDto.getFromDate());
-        Optional<PlayerStatistic> updated = playerStatisticRepository.findById(playerStatisticId);
+        Optional<PlayerStatistic> updated = playerStatisticRepository.findById(playerStatisticDto.getId());
         return updated.filter(playerStatistic -> convertToDto(playerStatistic).equals(playerStatisticDto)).isPresent();
     }
 
     @Override
-    public PlayerStatisticDto findById(Long playerId, Long gameId, Date fromDate) {
-        PlayerStatisticId playerStatisticId = new PlayerStatisticId();
-        playerStatisticId.setPlayer(playerId);
-        playerStatisticId.setGame(gameId);
-        playerStatisticId.setFromDate(fromDate);
-        Optional<PlayerStatistic> updated = playerStatisticRepository.findById(playerStatisticId);
+    public PlayerStatisticDto findById(Long id) {
+        Optional<PlayerStatistic> updated = playerStatisticRepository.findById(id);
         return updated.map(this::convertToDto).orElse(null);
     }
 

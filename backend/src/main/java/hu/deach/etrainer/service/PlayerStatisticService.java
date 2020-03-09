@@ -9,11 +9,11 @@ public interface PlayerStatisticService {
 
     Boolean save(PlayerStatisticDto playerStatisticDto);
 
-    Boolean delete(Long playerId, Long gameId, Date fromDate);
+    Boolean delete(Long id);
 
     Boolean update(PlayerStatisticDto playerStatisticDto);
 
-    PlayerStatisticDto findById(Long playerId, Long gameId, Date fromDate);
+    PlayerStatisticDto findById(Long id);
 
     ArrayList<PlayerStatisticDto> findByPlayerId(Long playerId);
 

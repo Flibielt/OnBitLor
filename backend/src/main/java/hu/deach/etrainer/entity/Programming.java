@@ -21,6 +21,9 @@ public class Programming {
     @JoinColumn(name = "game_id")
     private Game game;
 
+    @Column
+    private Integer bit;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "programming")
     private Set<ProgrammingStatistic> programmingStatistics;
 }

@@ -29,6 +29,9 @@ public class Player {
     @Column(name = "password")
     private String password;
 
+    @Column
+    private Integer bit;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "player_id"),

@@ -6,7 +6,7 @@ import lombok.Data;
 public class TestDto {
 
     private Long id;
-
     private String name;
+    private Integer bit;
 
 }

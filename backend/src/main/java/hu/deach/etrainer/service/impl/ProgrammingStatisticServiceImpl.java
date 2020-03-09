@@ -33,12 +33,8 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
     }
 
     @Override
-    public Boolean delete(Long programmingId, Long playerId, Date date) {
+    public Boolean delete(Long id) {
         long count = programmingStatisticRepository.count();
-        ProgrammingStatisticId id = new ProgrammingStatisticId();
-        id.setProgramming(programmingId);
-        id.setPlayer(playerId);
-        id.setDate(date);
         programmingStatisticRepository.deleteById(id);
         return count > programmingStatisticRepository.count();
     }
@@ -50,11 +46,7 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
     }
 
     @Override
-    public ProgrammingStatisticDto findById(Long programmingId, Long playerId, Date date) {
-        ProgrammingStatisticId id = new ProgrammingStatisticId();
-        id.setProgramming(programmingId);
-        id.setPlayer(playerId);
-        id.setDate(date);
+    public ProgrammingStatisticDto findById(Long id) {
         Optional<ProgrammingStatistic> programmingStatistic = programmingStatisticRepository.findById(id);
         return programmingStatistic.map(this::convertToDto).orElse(null);
     }

@@ -9,11 +9,11 @@ public interface ProgrammingStatisticService {
 
     Boolean save(ProgrammingStatisticDto programmingStatisticDto);
 
-    Boolean delete(Long programmingId, Long playerId, Date date);
+    Boolean delete(Long id);
 
     Boolean update(ProgrammingStatisticDto programmingStatisticDto);
 
-    ProgrammingStatisticDto findById(Long programmingId, Long playerId, Date date);
+    ProgrammingStatisticDto findById(Long id);
 
     ArrayList<ProgrammingStatisticDto> findByDate(Date date);
 

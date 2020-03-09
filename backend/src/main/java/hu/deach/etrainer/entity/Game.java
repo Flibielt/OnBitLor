@@ -17,6 +17,9 @@ public class Game {
     @Column
     private String name;
 
+    @Column
+    private Integer bit;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "game")
     private Set<Programming> programmings;
 

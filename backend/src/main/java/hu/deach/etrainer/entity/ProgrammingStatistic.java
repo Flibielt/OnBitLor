@@ -12,32 +12,21 @@ import java.util.Date;
 @IdClass(ProgrammingStatisticId.class)
 public class ProgrammingStatistic {
 
-    /*
     @Id
-    @Column(name = "programming_id")
-    private Long programmingId;
+    private Long id;
 
-    @Id
-    @Column(name = "player_id")
-    private Long playerId;*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "programming_id")
+    private Programming programming;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     @Column
     private Date date;
 
     @Column
-    private Duration time;
-
-    @Column
     private Integer score;
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "programming_id")
-    private Programming programming;
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
-    private Player player;
 
 }

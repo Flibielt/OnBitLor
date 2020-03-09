@@ -14,7 +14,11 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String name;
+
+    @Column
+    private Integer bit;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "test")
     private Set<TestResult> testResults;
