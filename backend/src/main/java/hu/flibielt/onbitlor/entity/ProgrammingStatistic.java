@@ -8,7 +8,6 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "programming_statistics")
-@IdClass(ProgrammingStatisticId.class)
 public class ProgrammingStatistic {
 
     @Id
