@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {getAllGames, getAllProgrammings} from "../util/APIUtils";
-import {Form, Select} from 'antd';
+import {getAllProgrammings} from "../util/APIUtils";
+import {Form, Select, Input, Button} from 'antd';
 import FormItem from "antd/es/form/FormItem";
+const { TextArea } = Input;
 const { Option } = Select;
 
 class NewProgrammingResult extends Component {
@@ -10,8 +11,15 @@ class NewProgrammingResult extends Component {
         this.state = {
             programmings: [],
             selectedProgramming: "",
-            validationError: ""
-        }
+            validationError: "",
+            result: "",
+            description: "Competition description"
+        };
+
+        this.handleResultChange = this.handleResultChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.isFormInvalid = this.isFormInvalid.bind(this);
     }
 
     componentDidMount() {
@@ -32,16 +40,28 @@ class NewProgrammingResult extends Component {
             });
     }
 
-    handleChange(value, event) {
-        console.log(`selected ${value}`);
-        console.log(`Event ${event.id}`);
+    handleChange(value) {
         this.setState({
             selectedProgramming: value
         });
     }
 
+    handleResultChange(event) {
+        if (event.target.value.length < 20) {
+            this.setState({
+                result: event.target.value
+            })
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
+    }
+
+    isFormInvalid() {
+        if (this.state.result.length === 0) {
+            return true;
+        }
     }
 
     render() {
@@ -68,10 +88,26 @@ class NewProgrammingResult extends Component {
                                 {this.state.validationError}
                             </div>
                             <div>
-                                {this.state.selectedProgramming}
+                                {this.state.description}
                             </div>
                         </FormItem>
-
+                        <FormItem>
+                            <TextArea
+                                style={{resize: "none"}}
+                                placeholder="Enter your result"
+                                name="result"
+                                autoSize={{ minRows: 1, maxRows: 1 }}
+                                value={this.state.result}
+                                onChange={this.handleResultChange} />
+                        </FormItem>
+                        <FormItem>
+                            <Button type="primary"
+                                    htmlType="submit"
+                                    disabled={this.isFormInvalid()}
+                                    size="large">
+                                Add result
+                            </Button>
+                        </FormItem>
                     </Form>
                 </div>
             </div>
