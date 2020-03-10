@@ -8,10 +8,10 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>hu.deach</groupId>
-	<artifactId>etrainer</artifactId>
+	<groupId>hu.flibielt</groupId>
+	<artifactId>onbitlor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>etrainer</name>
+	<name>OnBitLor</name>
 	<description>Project for performance measurement in esports</description>
 
 	<properties>
