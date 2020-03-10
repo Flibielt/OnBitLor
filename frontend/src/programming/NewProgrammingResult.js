@@ -41,9 +41,11 @@ class NewProgrammingResult extends Component {
     }
 
     handleChange(value) {
-        this.setState({
-            selectedProgramming: value
-        });
+        if (!value.toString().includes("Select a programming competition")) {
+            this.setState({
+                selectedProgramming: value
+            });
+        }
     }
 
     handleResultChange(event) {
@@ -59,9 +61,13 @@ class NewProgrammingResult extends Component {
     }
 
     isFormInvalid() {
+        if (this.state.selectedProgramming.length === 0) {
+            return true;
+        }
         if (this.state.result.length === 0) {
             return true;
         }
+        return isNaN(this.state.result)
     }
 
     render() {
