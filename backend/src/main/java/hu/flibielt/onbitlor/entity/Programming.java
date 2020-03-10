@@ -17,10 +17,6 @@ public class Programming {
     @Column
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private Game game;
-
     @Column
     private String description;
 

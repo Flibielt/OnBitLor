@@ -39,13 +39,7 @@ public class Player {
     private Set<Role> roles;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private Set<InGameName> inGameNames;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
     private Set<ProgrammingStatistic> programmingStatistic;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
-    private Set<PlayerStatistic> playerStatistics;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "player")
     private Set<TestResult> testResults;
