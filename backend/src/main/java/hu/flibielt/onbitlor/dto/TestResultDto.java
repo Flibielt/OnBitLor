@@ -10,5 +10,5 @@ public class TestResultDto {
     private Long playerId;
     private Long testId;
     private Date date;
-    private Float result;
+    private Integer result;
 }

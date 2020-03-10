@@ -23,6 +23,6 @@ public class TestResult {
 
     private Date date;
 
-    private Float result;
+    private Integer result;
 
 }

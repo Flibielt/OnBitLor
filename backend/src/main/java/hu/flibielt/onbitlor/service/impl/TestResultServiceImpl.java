@@ -8,11 +8,13 @@ import hu.flibielt.onbitlor.repository.TestResultRepository;
 import hu.flibielt.onbitlor.service.TestResultService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class TestResultServiceImpl implements TestResultService {
 
     @Autowired
