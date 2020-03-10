@@ -3,17 +3,12 @@ package hu.flibielt.onbitlor.model;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Data
-public class TestRequest {
+public class TestResultRequest {
     @NotBlank
-    @Size(max = 255)
     private String name;
 
     @NotBlank
-    private String description;
-
-    @NotBlank
-    private Integer bit;
+    private Integer score;
 }

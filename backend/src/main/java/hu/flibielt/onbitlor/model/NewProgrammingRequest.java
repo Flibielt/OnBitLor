@@ -3,12 +3,10 @@ package hu.flibielt.onbitlor.model;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Data
-public class TestRequest {
+public class NewProgrammingRequest {
     @NotBlank
-    @Size(max = 255)
     private String name;
 
     @NotBlank
