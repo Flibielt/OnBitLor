@@ -13,4 +13,5 @@ public interface ProgrammingStatisticRepository extends JpaRepository<Programmin
     @Query("SELECT p FROM ProgrammingStatistic p WHERE p.date = :date")
     ArrayList<ProgrammingStatistic> findAllByDate(@Param("date")Date date);
 
+    ArrayList<ProgrammingStatistic> getAllByOrderByScoreDesc();
 }
