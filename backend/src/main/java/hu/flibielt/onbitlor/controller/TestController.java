@@ -3,6 +3,7 @@ package hu.flibielt.onbitlor.controller;
 import hu.flibielt.onbitlor.dto.TestDto;
 import hu.flibielt.onbitlor.dto.TestResultDto;
 import hu.flibielt.onbitlor.model.ApiResponse;
+import hu.flibielt.onbitlor.model.TestNameAvailability;
 import hu.flibielt.onbitlor.model.TestRequest;
 import hu.flibielt.onbitlor.model.TestResultRequest;
 import hu.flibielt.onbitlor.security.CurrentUser;
@@ -67,6 +68,12 @@ public class TestController {
     @GetMapping("/{testId}")
     public TestDto findById(@PathVariable(value = "testId") Long testId) {
         return testService.findById(testId);
+    }
+
+    @GetMapping("/checkNameAvailability")
+    public TestNameAvailability checkNameAvailability(@RequestParam(value = "name") String name) {
+        Boolean isAvailable = testService.existsByName(name);
+        return new TestNameAvailability(isAvailable);
     }
 
 }

@@ -2,6 +2,7 @@ package hu.flibielt.onbitlor.controller;
 
 import hu.flibielt.onbitlor.dto.ProgrammingDto;
 import hu.flibielt.onbitlor.model.ApiResponse;
+import hu.flibielt.onbitlor.model.ProgrammingNameAvailability;
 import hu.flibielt.onbitlor.model.ProgrammingRequest;
 import hu.flibielt.onbitlor.service.ProgrammingService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,5 +42,11 @@ public class ProgrammingController {
     @GetMapping("/{programmingId}")
     public ProgrammingDto getProgrammingById(@PathVariable(value = "programmingId") Long programmingId) {
         return programmingService.findById(programmingId);
+    }
+
+    @GetMapping("/checkNameAvailability")
+    public ProgrammingNameAvailability checkNameAvailability(@RequestParam(value = "name") String name) {
+        Boolean isAvailable = programmingService.existsByName(name);
+        return new ProgrammingNameAvailability(isAvailable);
     }
 }
