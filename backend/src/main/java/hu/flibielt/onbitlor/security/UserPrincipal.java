@@ -65,8 +65,12 @@ public class UserPrincipal implements UserDetails {
         return id;
     }
 
-    public String getName() {
+    public String getFirstName() {
         return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -76,6 +80,10 @@ public class UserPrincipal implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public Integer getBit() {
+        return bit;
     }
 
     @Override

@@ -9,6 +9,8 @@ public class PlayerSummary {
 
     private Long id;
     private String username;
-    private String name;
+    private String firstName;
+    private String lastName;
+    private Integer bit;
 
 }

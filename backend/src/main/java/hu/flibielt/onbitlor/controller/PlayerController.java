@@ -24,7 +24,7 @@ public class PlayerController {
     @GetMapping("/me")
     @PreAuthorize("hasRole('ROLE_USER')")
     public PlayerSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        return new PlayerSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
+        return new PlayerSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getBit());
     }
 
     @GetMapping("/{username}")
