@@ -8,4 +8,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.ArrayList;
 
 public interface ProgrammingRepository extends JpaRepository<Programming, Long> {
+    Boolean existsByName(String name);
 }
