@@ -2,6 +2,7 @@ package hu.flibielt.onbitlor.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hu.flibielt.onbitlor.entity.Player;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,13 @@ public class UserPrincipal implements UserDetails {
 
     private String firstName;
 
+    @Getter
+    private String lastName;
+
     private String username;
+
+    @Getter
+    private Integer bit;
 
     @JsonIgnore
     private String email;
@@ -26,10 +33,12 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String firstName, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String firstName, String lastName, String username, Integer bit, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
+        this.bit = bit;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -43,7 +52,9 @@ public class UserPrincipal implements UserDetails {
         return new UserPrincipal(
                 player.getId(),
                 player.getFirstName(),
+                player.getLastName(),
                 player.getUsername(),
+                player.getBit(),
                 player.getEmail(),
                 player.getPassword(),
                 authorities
