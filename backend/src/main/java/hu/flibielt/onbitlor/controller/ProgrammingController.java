@@ -62,6 +62,7 @@ public class ProgrammingController {
     }
 
     @PostMapping("/addResult")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> addNewResult(@CurrentUser UserPrincipal userPrincipal, ProgrammingResultRequest request) {
         if (!programmingService.existsByName(request.getProgrammingName())) {
             return ResponseEntity.badRequest()
@@ -85,11 +86,13 @@ public class ProgrammingController {
     }
 
     @GetMapping("/result/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ProgrammingStatisticDto getProgrammingResult(@PathVariable(value = "id") Long id) {
         return programmingStatisticService.findById(id);
     }
 
     @GetMapping("/results/{programmingId}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ArrayList<ProgrammingStatisticDto> getAllResultInCompetition(@PathVariable(value = "programmingId") Long programmingId) {
         return programmingStatisticService.findAll();
     }
