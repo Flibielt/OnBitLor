@@ -17,8 +17,8 @@ public interface ProgrammingService {
 
     ProgrammingDto findById(Long id);
 
-    ArrayList<ProgrammingDto> findByGameId(Long gameId);
-
     ArrayList<ProgrammingDto> findAll();
+
+    Boolean existsByName(String name);
 
 }

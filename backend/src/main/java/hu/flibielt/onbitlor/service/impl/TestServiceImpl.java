@@ -69,6 +69,11 @@ public class TestServiceImpl implements TestService {
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
+    @Override
+    public Boolean existsByName(String name) {
+        return testRepository.existsByName(name);
+    }
+
     private TestDto convertToDto(Test test) {
         return modelMapper.map(test, TestDto.class);
     }

@@ -21,4 +21,6 @@ public interface TestService {
 
     ArrayList<TestDto> findAll();
 
+    Boolean existsByName(String name);
+
 }

@@ -63,18 +63,15 @@ public class ProgrammingServiceImpl implements ProgrammingService {
     }
 
     @Override
-    public ArrayList<ProgrammingDto> findByGameId(Long gameId) {
-        ArrayList<Programming> programmings = programmingRepository.findAllByGame(gameId);
-        return programmings.stream()
+    public ArrayList<ProgrammingDto> findAll() {
+        return Lists.newArrayList(programmingRepository.findAll()).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
     @Override
-    public ArrayList<ProgrammingDto> findAll() {
-        return Lists.newArrayList(programmingRepository.findAll()).stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toCollection(Lists::newArrayList));
+    public Boolean existsByName(String name) {
+        return programmingRepository.existsByName(name);
     }
 
     private ProgrammingDto convertToDto(Programming programming) {
