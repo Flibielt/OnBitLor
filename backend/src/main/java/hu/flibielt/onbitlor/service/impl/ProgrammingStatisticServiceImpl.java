@@ -25,10 +25,9 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
     private ModelMapper modelMapper;
 
     @Override
-    public Boolean save(ProgrammingStatisticDto programmingStatisticDto) {
-        long count = programmingStatisticRepository.count();
-        ProgrammingStatistic updated = programmingStatisticRepository.save(Objects.requireNonNull(convertToEntity(programmingStatisticDto)));
-        return count < programmingStatisticRepository.count() && updated.getPlayer().getId() != null;
+    public ProgrammingStatisticDto save(ProgrammingStatisticDto programmingStatisticDto) {
+        ProgrammingStatistic saved = programmingStatisticRepository.save(Objects.requireNonNull(convertToEntity(programmingStatisticDto)));
+        return convertToDto(saved);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
 
     @Override
     public ArrayList<ProgrammingStatisticDto> findAll() {
-        return Lists.newArrayList(programmingStatisticRepository.findAll()).stream()
+        return Lists.newArrayList(programmingStatisticRepository.getAllByOrderByScoreDesc()).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
