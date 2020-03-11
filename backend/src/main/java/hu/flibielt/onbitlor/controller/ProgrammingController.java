@@ -94,6 +94,6 @@ public class ProgrammingController {
     @GetMapping("/results/{programmingId}")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ArrayList<ProgrammingStatisticDto> getAllResultInCompetition(@PathVariable(value = "programmingId") Long programmingId) {
-        return programmingStatisticService.findAll();
+        return programmingStatisticService.findAllInProgramming(programmingId);
     }
 }

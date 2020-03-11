@@ -64,6 +64,13 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
+    @Override
+    public ArrayList<ProgrammingStatisticDto> findAllInProgramming(Long id) {
+        return Lists.newArrayList(programmingStatisticRepository.findAllByProgrammingIdOrderByScoreDesc(id)).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toCollection(Lists::newArrayList));
+    }
+
     private ProgrammingStatisticDto convertToDto(ProgrammingStatistic programmingStatistic) {
         return modelMapper.map(programmingStatistic, ProgrammingStatisticDto.class);
     }
