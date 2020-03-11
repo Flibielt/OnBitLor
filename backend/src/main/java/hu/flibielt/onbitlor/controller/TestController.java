@@ -33,6 +33,7 @@ public class TestController {
     private TestResultService testResultService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> addTest(@RequestBody TestRequest request) {
         TestDto testDto = testService.save(request);
 
@@ -45,6 +46,7 @@ public class TestController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> addTestResult(@CurrentUser UserPrincipal currentUser, @RequestBody TestResultRequest request) {
         TestResultDto testResultDto = new TestResultDto();
         testResultDto.setDate(new Date());
@@ -54,7 +56,7 @@ public class TestController {
         testResultService.save(testResultDto);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/testId")
+                .fromCurrentRequest().path("/{testId}")
                 .buildAndExpand(testResultDto.getTestId()).toUri();
 
         return ResponseEntity.created(location)
@@ -62,13 +64,27 @@ public class TestController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ArrayList<TestDto> getAllTest() {
         return testService.findAll();
     }
 
     @GetMapping("/{testId}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public TestDto findById(@PathVariable(value = "testId") Long testId) {
         return testService.findById(testId);
+    }
+
+    @GetMapping("/result/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public TestResultDto findResultById(@CurrentUser UserPrincipal userPrincipal, @PathVariable(value = "id") Long id) {
+        return testResultService.findById(userPrincipal.getId(), id);
+    }
+
+    @GetMapping("/results/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ArrayList<TestResultDto> findResultsByTest(@PathVariable(value = "id") Long testId) {
+        return testResultService.findAll(testId);
     }
 
     @GetMapping("/checkNameAvailability")

@@ -53,8 +53,8 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     @Override
-    public ArrayList<TestResultDto> findAll() {
-        return Lists.newArrayList(testResultRepository.getAllByOrderByResultDesc()).stream()
+    public ArrayList<TestResultDto> findAll(Long testId) {
+        return Lists.newArrayList(testResultRepository.findAllByTestIdOrderByResultDesc(testId)).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
