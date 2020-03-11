@@ -23,4 +23,6 @@ public interface TestService {
 
     Boolean existsByName(String name);
 
+    Long getId(String name);
+
 }

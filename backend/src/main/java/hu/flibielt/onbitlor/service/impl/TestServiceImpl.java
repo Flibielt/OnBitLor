@@ -74,6 +74,11 @@ public class TestServiceImpl implements TestService {
         return testRepository.existsByName(name);
     }
 
+    @Override
+    public Long getId(String name) {
+        return testRepository.findByName(name).getId();
+    }
+
     private TestDto convertToDto(Test test) {
         return modelMapper.map(test, TestDto.class);
     }

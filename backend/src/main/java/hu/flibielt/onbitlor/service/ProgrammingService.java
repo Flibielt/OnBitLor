@@ -21,4 +21,6 @@ public interface ProgrammingService {
 
     Boolean existsByName(String name);
 
+    Long getId(String name);
+
 }

@@ -74,6 +74,11 @@ public class ProgrammingServiceImpl implements ProgrammingService {
         return programmingRepository.existsByName(name);
     }
 
+    @Override
+    public Long getId(String name) {
+        return programmingRepository.findByName(name).getId();
+    }
+
     private ProgrammingDto convertToDto(Programming programming) {
         return modelMapper.map(programming, ProgrammingDto.class);
     }

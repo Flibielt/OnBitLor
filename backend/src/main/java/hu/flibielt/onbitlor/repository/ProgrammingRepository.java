@@ -9,4 +9,5 @@ import java.util.ArrayList;
 
 public interface ProgrammingRepository extends JpaRepository<Programming, Long> {
     Boolean existsByName(String name);
+    Programming findByName(String name);
 }
