@@ -13,6 +13,7 @@ import hu.flibielt.onbitlor.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -71,6 +72,7 @@ public class TestController {
     }
 
     @GetMapping("/checkNameAvailability")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public TestNameAvailability checkNameAvailability(@RequestParam(value = "name") String name) {
         Boolean isAvailable = testService.existsByName(name);
         return new TestNameAvailability(isAvailable);

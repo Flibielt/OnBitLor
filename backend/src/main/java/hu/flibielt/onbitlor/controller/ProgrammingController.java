@@ -8,6 +8,7 @@ import hu.flibielt.onbitlor.service.ProgrammingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -45,6 +46,7 @@ public class ProgrammingController {
     }
 
     @GetMapping("/checkNameAvailability")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ProgrammingNameAvailability checkNameAvailability(@RequestParam(value = "name") String name) {
         Boolean isAvailable = programmingService.existsByName(name);
         return new ProgrammingNameAvailability(isAvailable);

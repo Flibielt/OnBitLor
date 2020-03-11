@@ -22,7 +22,7 @@ public class PlayerController {
     private PlayerService playerService;
 
     @GetMapping("/me")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public PlayerSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         return new PlayerSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
     }
