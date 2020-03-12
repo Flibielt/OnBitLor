@@ -67,7 +67,10 @@ class NewProgrammingResult extends Component {
         if (this.state.result.length === 0) {
             return true;
         }
-        return isNaN(this.state.result)
+        if (isNaN(this.state.result)) {
+            return true;
+        }
+        return this.state.result <= 0;
     }
 
     render() {
