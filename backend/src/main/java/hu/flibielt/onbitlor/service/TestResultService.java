@@ -14,6 +14,6 @@ public interface TestResultService {
 
     TestResultDto findById(Long playerId, Long testId);
 
-    ArrayList<TestResultDto> findAll(Long testId);
+    ArrayList<TestResultDto> findAll(String testName);
 
 }

@@ -81,10 +81,10 @@ public class TestController {
         return testResultService.findById(userPrincipal.getId(), id);
     }
 
-    @GetMapping("/results/{id}")
+    @GetMapping("/results/{name}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ArrayList<TestResultDto> findResultsByTest(@PathVariable(value = "id") Long testId) {
-        return testResultService.findAll(testId);
+    public ArrayList<TestResultDto> findResultsByTest(@PathVariable(value = "name") String test) {
+        return testResultService.findAll(test);
     }
 
     @GetMapping("/checkNameAvailability")

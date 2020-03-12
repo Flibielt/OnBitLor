@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import hu.flibielt.onbitlor.dto.TestResultDto;
 import hu.flibielt.onbitlor.entity.TestResult;
 import hu.flibielt.onbitlor.entity.TestResultId;
+import hu.flibielt.onbitlor.repository.TestRepository;
 import hu.flibielt.onbitlor.repository.TestResultRepository;
 import hu.flibielt.onbitlor.service.TestResultService;
 import org.modelmapper.ModelMapper;
@@ -19,6 +20,9 @@ public class TestResultServiceImpl implements TestResultService {
 
     @Autowired
     private TestResultRepository testResultRepository;
+
+    @Autowired
+    private TestRepository testRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -53,7 +57,8 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     @Override
-    public ArrayList<TestResultDto> findAll(Long testId) {
+    public ArrayList<TestResultDto> findAll(String testName) {
+        Long testId = testRepository.findByName(testName).getId();
         return Lists.newArrayList(testResultRepository.findAllByTestIdOrderByResultDesc(testId)).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toCollection(Lists::newArrayList));
