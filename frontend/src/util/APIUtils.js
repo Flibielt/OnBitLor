@@ -30,6 +30,14 @@ export function getAllProgrammings(page, size) {
     });
 }
 
+export function addNewProgramming(programming) {
+    return request({
+        url: API_BASE_URL + "/programming",
+        method: 'POST',
+        body: programming
+    })
+}
+
 export function addProgrammingResult(resultData) {
     return request({
         url: API_BASE_URL + "/programming/addResult",
