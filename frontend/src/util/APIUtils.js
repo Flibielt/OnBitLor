@@ -30,6 +30,28 @@ export function getAllProgrammings(page, size) {
     });
 }
 
+export function addProgrammingResult(resultData) {
+    return request({
+        url: API_BASE_URL + "/programming/addResult",
+        method: 'POST',
+        body: JSON.stringify(resultData)
+    })
+}
+
+export function checkProgrammingNameAvailability(name) {
+    return request({
+        url: API_BASE_URL + "/programming/checkNameAvailability?name=" + name,
+        method: 'GET'
+    })
+}
+
+export function getAllProgrammingResult(programmingName) {
+    return request({
+        url: API_BASE_URL + "/programming/results?programming=" + programmingName,
+        method: 'GET'
+    })
+}
+
 export function getAllGames() {
     return request({
         url: API_BASE_URL + "/game/all",
