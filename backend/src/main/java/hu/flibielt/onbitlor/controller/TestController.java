@@ -32,7 +32,7 @@ public class TestController {
     @Autowired
     private TestResultService testResultService;
 
-    @PostMapping
+    @PostMapping("/new")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> addTest(@RequestBody TestRequest request) {
         TestDto testDto = testService.save(request);
