@@ -52,6 +52,43 @@ export function getAllProgrammingResult(programmingName) {
     })
 }
 
+export function getAllTests() {
+    return request({
+        url: API_BASE_URL + "/test/all",
+        method: 'GET'
+    });
+}
+
+export function addNewTest(test) {
+    return request({
+        url: API_BASE_URL + "/test/new",
+        method: 'POST',
+        body: test
+    })
+}
+
+export function addTestResult(resultData) {
+    return request({
+        url: API_BASE_URL + "/test",
+        method: 'POST',
+        body: JSON.stringify(resultData)
+    })
+}
+
+export function checkTestNameAvailability(name) {
+    return request({
+        url: API_BASE_URL + "/test/checkNameAvailability?name=" + name,
+        method: 'GET'
+    })
+}
+
+export function getAllTestResult(programmingName) {
+    return request({
+        url: API_BASE_URL + "/test/results?name=" + programmingName,
+        method: 'GET'
+    })
+}
+
 export function getAllGames() {
     return request({
         url: API_BASE_URL + "/game/all",
