@@ -15,5 +15,6 @@ public interface ProgrammingStatisticRepository extends JpaRepository<Programmin
 
     ArrayList<ProgrammingStatistic> getAllByOrderByScoreDesc();
 
-    ArrayList<ProgrammingStatistic> findAllByProgrammingIdOrderByScoreDesc(Long programmingId);
+    @Query("SELECT p from ProgrammingStatistic p WHERE p.programming.Id = :programmingId ORDER BY p.score DESC")
+    ArrayList<ProgrammingStatistic> findAllByProgrammingIdOrderByScoreDesc(@Param("programmingId") Long programmingId);
 }
