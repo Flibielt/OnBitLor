@@ -20,6 +20,6 @@ public interface ProgrammingStatisticService {
 
     ArrayList<ProgrammingStatisticDto> findAll();
 
-    ArrayList<ProgrammingStatisticDto> findAllInProgramming(Long id);
+    ArrayList<ProgrammingStatisticDto> findAllInProgramming(String name);
 
 }

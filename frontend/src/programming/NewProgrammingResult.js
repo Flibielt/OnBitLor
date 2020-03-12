@@ -58,6 +58,10 @@ class NewProgrammingResult extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const resultData = {
+            programmingName: this.state.selectedProgramming,
+            score: this.state.result
+        }
     }
 
     isFormInvalid() {

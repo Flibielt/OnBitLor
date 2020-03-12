@@ -54,9 +54,9 @@ public class ProgrammingController {
         return programmingService.findById(programmingId);
     }
 
-    @GetMapping("/checkNameAvailability")
+    @GetMapping("/checkNameAvailability/{name}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ProgrammingNameAvailability checkNameAvailability(@RequestParam(value = "name") String name) {
+    public ProgrammingNameAvailability checkNameAvailability(@PathVariable(value = "name") String name) {
         Boolean isAvailable = programmingService.existsByName(name);
         return new ProgrammingNameAvailability(isAvailable);
     }
@@ -91,9 +91,9 @@ public class ProgrammingController {
         return programmingStatisticService.findById(id);
     }
 
-    @GetMapping("/results/{programmingId}")
+    @GetMapping("/results/{programming}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ArrayList<ProgrammingStatisticDto> getAllResultInCompetition(@PathVariable(value = "programmingId") Long programmingId) {
-        return programmingStatisticService.findAllInProgramming(programmingId);
+    public ArrayList<ProgrammingStatisticDto> getAllResultInCompetition(@PathVariable(value = "programming") String programming) {
+        return programmingStatisticService.findAllInProgramming(programming);
     }
 }
