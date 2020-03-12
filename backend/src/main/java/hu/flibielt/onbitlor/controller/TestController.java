@@ -87,9 +87,9 @@ public class TestController {
         return testResultService.findAll(test);
     }
 
-    @GetMapping("/checkNameAvailability")
+    @GetMapping("/checkNameAvailability/{name}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public TestNameAvailability checkNameAvailability(@RequestParam(value = "name") String name) {
+    public TestNameAvailability checkNameAvailability(@PathVariable(value = "name") String name) {
         Boolean isAvailable = testService.existsByName(name);
         return new TestNameAvailability(isAvailable);
     }
