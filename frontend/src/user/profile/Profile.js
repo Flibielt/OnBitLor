@@ -91,7 +91,7 @@ class Profile extends Component {
                                     <div className="full-name">{this.state.user.firstName} {this.state.user.lastName}</div>
                                     <div className="username">{this.state.user.username}</div>
                                     <div className="user-joined">
-                                        Bits: {formatDate(this.state.user.bits)}
+                                        Bits: {this.state.user.bit}
                                     </div>
                                 </div>
                             </div>
