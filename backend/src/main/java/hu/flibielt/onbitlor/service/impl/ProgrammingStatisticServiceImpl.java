@@ -111,6 +111,7 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
 
     private ProgrammingStatisticResponse convertToStatisticResponse(ProgrammingStatistic programmingStatistic) {
         ProgrammingStatisticResponse response = new ProgrammingStatisticResponse();
+        response.setId(programmingStatistic.getId());
         response.setUsername(programmingStatistic.getPlayer().getUsername());
         response.setFirstName(programmingStatistic.getPlayer().getFirstName());
         response.setLastName(programmingStatistic.getPlayer().getLastName());
