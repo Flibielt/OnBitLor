@@ -9,8 +9,8 @@ import java.util.Date;
 public class ProgrammingStatisticDto {
 
     private Long id;
-    private Long programmingId;
-    private Long playerId;
+    private Long programming;
+    private Long player;
     private Date date;
     private Integer score;
 

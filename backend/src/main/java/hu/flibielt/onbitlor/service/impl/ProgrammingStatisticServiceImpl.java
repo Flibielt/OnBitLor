@@ -2,7 +2,10 @@ package hu.flibielt.onbitlor.service.impl;
 
 import com.google.common.collect.Lists;
 import hu.flibielt.onbitlor.dto.ProgrammingStatisticDto;
+import hu.flibielt.onbitlor.entity.Player;
+import hu.flibielt.onbitlor.entity.Programming;
 import hu.flibielt.onbitlor.entity.ProgrammingStatistic;
+import hu.flibielt.onbitlor.repository.PlayerRepository;
 import hu.flibielt.onbitlor.repository.ProgrammingRepository;
 import hu.flibielt.onbitlor.repository.ProgrammingStatisticRepository;
 import hu.flibielt.onbitlor.service.ProgrammingStatisticService;
@@ -26,11 +29,14 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
     private ProgrammingRepository programmingRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private PlayerRepository playerRepository;
 
     @Override
     public ProgrammingStatisticDto save(ProgrammingStatisticDto programmingStatisticDto) {
-        ProgrammingStatistic saved = programmingStatisticRepository.save(Objects.requireNonNull(convertToEntity(programmingStatisticDto)));
+        ProgrammingStatistic request = convertToEntity(programmingStatisticDto);
+
+        assert request != null;
+        ProgrammingStatistic saved = programmingStatisticRepository.save(request);
         return convertToDto(saved);
     }
 
@@ -77,13 +83,23 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
     }
 
     private ProgrammingStatisticDto convertToDto(ProgrammingStatistic programmingStatistic) {
-        return modelMapper.map(programmingStatistic, ProgrammingStatisticDto.class);
+        ProgrammingStatisticDto dto = new ProgrammingStatisticDto();
+        dto.setId(programmingStatistic.getId());
+        dto.setPlayer(programmingStatistic.getPlayer().getId());
+        dto.setProgramming(programmingStatistic.getProgramming().getId());
+        dto.setDate(programmingStatistic.getDate());
+        dto.setScore(programmingStatistic.getScore());
+        return dto;
     }
 
     private ProgrammingStatistic convertToEntity(ProgrammingStatisticDto programmingStatisticDto) {
-        ProgrammingStatistic programmingStatistic = modelMapper.map(programmingStatisticDto, ProgrammingStatistic.class);
+        ProgrammingStatistic programmingStatistic = new ProgrammingStatistic();
+        Player player = playerRepository.getOne(programmingStatisticDto.getPlayer());
+        programmingStatistic.setPlayer(player);
+        Programming programming = programmingRepository.getOne(programmingStatisticDto.getProgramming());
+        programmingStatistic.setProgramming(programming);
 
-        if (programmingStatisticDto.getPlayerId() == null) {
+        if (programmingStatisticDto.getPlayer() == null) {
             return null;
         }
 

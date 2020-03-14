@@ -63,16 +63,17 @@ public class ProgrammingController {
 
     @PostMapping("/addResult")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ResponseEntity<?> addNewResult(@CurrentUser UserPrincipal userPrincipal, ProgrammingResultRequest request) {
+    public ResponseEntity<?> addNewResult(@CurrentUser UserPrincipal userPrincipal, @RequestBody ProgrammingResultRequest request) {
         if (!programmingService.existsByName(request.getProgrammingName())) {
+            log.info("Programming name: " + request.getProgrammingName());
             return ResponseEntity.badRequest()
                     .body(new ApiResponse(false, "Cannot find the given programming competition"));
         }
         Long programmingId = programmingService.getId(request.getProgrammingName());
 
         ProgrammingStatisticDto programmingStatisticDto = new ProgrammingStatisticDto();
-        programmingStatisticDto.setPlayerId(userPrincipal.getId());
-        programmingStatisticDto.setProgrammingId(programmingId);
+        programmingStatisticDto.setPlayer(userPrincipal.getId());
+        programmingStatisticDto.setProgramming(programmingId);
         programmingStatisticDto.setDate(new Date());
         programmingStatisticDto.setScore(request.getScore());
 

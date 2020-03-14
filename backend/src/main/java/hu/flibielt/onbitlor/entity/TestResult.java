@@ -1,11 +1,13 @@
 package hu.flibielt.onbitlor.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "test_results")
 @IdClass(TestResultId.class)

@@ -7,8 +7,8 @@ import java.util.Date;
 @Data
 public class TestResultDto {
 
-    private Long playerId;
-    private Long testId;
+    private Long player;
+    private Long test;
     private Date date;
     private Integer result;
 }

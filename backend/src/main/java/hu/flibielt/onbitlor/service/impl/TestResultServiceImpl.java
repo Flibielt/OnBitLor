@@ -2,8 +2,11 @@ package hu.flibielt.onbitlor.service.impl;
 
 import com.google.common.collect.Lists;
 import hu.flibielt.onbitlor.dto.TestResultDto;
+import hu.flibielt.onbitlor.entity.Player;
+import hu.flibielt.onbitlor.entity.Test;
 import hu.flibielt.onbitlor.entity.TestResult;
 import hu.flibielt.onbitlor.entity.TestResultId;
+import hu.flibielt.onbitlor.repository.PlayerRepository;
 import hu.flibielt.onbitlor.repository.TestRepository;
 import hu.flibielt.onbitlor.repository.TestResultRepository;
 import hu.flibielt.onbitlor.service.TestResultService;
@@ -25,7 +28,7 @@ public class TestResultServiceImpl implements TestResultService {
     private TestRepository testRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private PlayerRepository playerRepository;
 
     @Override
     public Boolean save(TestResultDto testResultDto) {
@@ -65,10 +68,22 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     private TestResultDto convertToDto(TestResult testResult) {
-        return modelMapper.map(testResult, TestResultDto.class);
+        TestResultDto dto = new TestResultDto();
+        dto.setPlayer(testResult.getPlayer().getId());
+        dto.setTest(testResult.getTest().getId());
+        dto.setDate(testResult.getDate());
+        dto.setResult(testResult.getResult());
+        return dto;
     }
 
     private TestResult convertToEntity(TestResultDto testResultDto) {
-        return modelMapper.map(testResultDto, TestResult.class);
+        TestResult testResult = new TestResult();
+        Player player = playerRepository.getOne(testResultDto.getPlayer());
+        Test test = testRepository.getOne(testResultDto.getTest());
+        testResult.setPlayer(player);
+        testResult.setTest(test);
+        testResult.setDate(testResultDto.getDate());
+        testResult.setResult(testResultDto.getResult());
+        return testResult;
     }
 }

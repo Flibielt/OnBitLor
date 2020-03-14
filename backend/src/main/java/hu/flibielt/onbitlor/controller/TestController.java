@@ -50,14 +50,14 @@ public class TestController {
     public ResponseEntity<?> addTestResult(@CurrentUser UserPrincipal currentUser, @RequestBody TestResultRequest request) {
         TestResultDto testResultDto = new TestResultDto();
         testResultDto.setDate(new Date());
-        testResultDto.setTestId(testService.findByName(request.getName()).getId());
-        testResultDto.setPlayerId(currentUser.getId());
+        testResultDto.setTest(testService.findByName(request.getName()).getId());
+        testResultDto.setPlayer(currentUser.getId());
         testResultDto.setResult(request.getScore());
         testResultService.save(testResultDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{testId}")
-                .buildAndExpand(testResultDto.getTestId()).toUri();
+                .buildAndExpand(testResultDto.getTest()).toUri();
 
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "Test result successfully saved"));
