@@ -8,20 +8,15 @@ class Programming extends Component {
         return (
             <div className="programming-content">
                 <div className="programming-info">
-                    <div className="programming-name">
+                    <h2 className="programming-name">
                         {this.props.programming.name}
-                    </div>
-                    <div className="programming-description">
+                    </h2>
+                    <p className="programming-description">
                         {this.props.programming.description}
-                    </div>
-                </div>
-                <div className="programming-footer">
-                    <Button className="prog-button" onClick={this.props.handleViewStat}>
-                        View Statistic
-                    </Button>
-                    <Button className="programming-button" onClick={this.props.handleNewResult}>
-                        Add new result
-                    </Button>
+                    </p>
+                    <p className="programming-description">
+                        Bit: {this.props.programming.bit}
+                    </p>
                 </div>
             </div>
         );

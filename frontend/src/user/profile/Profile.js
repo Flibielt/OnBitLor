@@ -9,6 +9,8 @@ import './Profile.css';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
 import ProgrammingList from "../../programming/ProgrammingList";
+import NewProgrammingResult from "../../programming/NewProgrammingResult";
+import BrowserRouter from "react-router-dom/BrowserRouter";
 
 const TabPane = Tabs.TabPane;
 
@@ -101,8 +103,8 @@ class Profile extends Component {
                                     tabBarStyle={tabBarStyle}
                                     size="large"
                                     className="profile-tabs">
-                                    <TabPane tab={`Games`} key="1">
-                                        <PollList username={this.props.match.params.username} type="USER_CREATED_POLLS" />
+                                    <TabPane tab={`New programming result`} key="1">
+                                        <NewProgrammingResult />
                                     </TabPane>
                                     <TabPane tab={`Programming`}  key="2">
                                         <ProgrammingList/>

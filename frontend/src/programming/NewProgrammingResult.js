@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {addProgrammingResult, getAllProgrammings} from "../util/APIUtils";
 import {Form, Select, Input, Button, notification} from 'antd';
 import FormItem from "antd/es/form/FormItem";
+import {withRouter} from "react-router-dom";
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -146,4 +147,4 @@ class NewProgrammingResult extends Component {
     }
 }
 
-export default NewProgrammingResult;
+export default withRouter(NewProgrammingResult);

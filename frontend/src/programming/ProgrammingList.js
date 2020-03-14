@@ -111,9 +111,7 @@ class ProgrammingList extends Component {
 
     render() {
         const programmingViews = [];
-        //console.log(this.state.programmings);
         this.state.programmings.forEach((programming, programmingIndex) =>{
-            //console.log(programming.id);
             programmingViews.push(<Programming
                 key={programming.id}
                 programming={programming}
@@ -124,6 +122,9 @@ class ProgrammingList extends Component {
 
         return (
             <div className="programmings-container">
+                <h1 className="title">
+                    Programming competitions
+                </h1>
                 {programmingViews}
                 {
                     !this.state.isLoading && this.state.programmings.length === 0 ? (
@@ -131,14 +132,6 @@ class ProgrammingList extends Component {
                             <span>No Programmings Found.</span>
                         </div>
                     ): null
-                }
-                {
-                    !this.state.isLoading && !this.state.last ? (
-                        <div className="load-more">
-                            <Button type="dashed" onClick={this.handleLoadMore} disabled={this.state.isLoading}>
-                                <Icon type="plus" /> Load more
-                            </Button>
-                        </div>): null
                 }
                 {
                     this.state.isLoading ?
