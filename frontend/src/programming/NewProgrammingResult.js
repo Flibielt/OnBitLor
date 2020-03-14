@@ -105,13 +105,11 @@ class NewProgrammingResult extends Component {
                         <FormItem>
                             <Select
                                 value={this.state.selectedProgramming}
-                                onSelect={(value, key) => this.handleChange(value, key)}
-                            >
+                                onSelect={(value, key) => this.handleChange(value, key)}>
                                 {this.state.programmings.map(programming => (
                                     <Option
                                         key = {programming.value}
-                                        value = {programming.display}
-                                    >
+                                        value = {programming.display}>
                                         {programming.display}
                                     </Option>
                                 ))}

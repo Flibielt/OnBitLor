@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './Programming.css';
 
-import { Button } from 'antd';
-
 class Programming extends Component {
     render() {
         return (

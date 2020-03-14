@@ -22,6 +22,7 @@ import PrivateRoute from '../common/PrivateRoute';
 
 import { Layout, notification } from 'antd';
 import ProgrammingList from "../programming/ProgrammingList";
+import ProgrammingResultList from "../programming/ProgrammingResultList";
 const { Content } = Layout;
 
 class App extends Component {
@@ -113,7 +114,7 @@ class App extends Component {
                 <Route authenticated={this.state.isAuthenticated} path="/users/:username"
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewProgrammingResult} handleLogout={this.handleLogout}/>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={ProgrammingResultList} handleLogout={this.handleLogout}/>
                 <Route component={NotFound}/>
               </Switch>
             </div>

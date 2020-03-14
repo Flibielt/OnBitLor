@@ -36,7 +36,6 @@ class ProgrammingList extends Component {
 
         promise.then(response => {
             const programmings = this.state.programmings.slice();
-            console.log(response);
 
             this.setState({
                 programmings: programmings.concat(response),
@@ -79,44 +78,12 @@ class ProgrammingList extends Component {
         this.loadProgrammingList(this.state.page + 1);
     }
 
-    handleViewStat(event, programmingIndex) {
-        event.preventDefault();
-        if(!this.props.isAuthenticated) {
-            this.props.history.push("/login");
-            notification.info({
-                message: 'Bit Calculator App',
-                description: "Please login to view your statistic.",
-            });
-            return;
-        }
-
-        const programming = this.state.programmings[programmingIndex];
-        this.props.history.push("/prog/me/stat/" + programming.id);
-    }
-
-    handleNewResult(event, programmingIndex) {
-        event.preventDefault();
-        if(!this.props.isAuthenticated) {
-            this.props.history.push("/login");
-            notification.info({
-                message: 'Bit Calculator App',
-                description: "Please login to add new result.",
-            });
-            return;
-        }
-
-        const programming = this.state.programmings[programmingIndex];
-        this.props.history.push("/prog/me/new/" + programming.id);
-    }
-
     render() {
         const programmingViews = [];
         this.state.programmings.forEach((programming, programmingIndex) =>{
             programmingViews.push(<Programming
                 key={programming.id}
                 programming={programming}
-                handleViewStat={(event) => this.handleViewStat(event, programmingIndex)}
-                handleNewResult={(event) => this.handleNewResult(event, programmingIndex)}
             />)
         });
 

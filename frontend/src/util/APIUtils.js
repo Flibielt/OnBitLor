@@ -49,14 +49,15 @@ export function addProgrammingResult(resultData) {
 
 export function checkProgrammingNameAvailability(name) {
     return request({
-        url: API_BASE_URL + "/programming/checkNameAvailability?name=" + name,
+        url: API_BASE_URL + "/programming/checkNameAvailability/" + name,
         method: 'GET'
     })
 }
 
 export function getAllProgrammingResult(programmingName) {
+    console.log(API_BASE_URL + "/programming/results/" + programmingName);
     return request({
-        url: API_BASE_URL + "/programming/results?programming=" + programmingName,
+        url: API_BASE_URL + "/programming/results/" + programmingName,
         method: 'GET'
     })
 }
@@ -86,14 +87,14 @@ export function addTestResult(resultData) {
 
 export function checkTestNameAvailability(name) {
     return request({
-        url: API_BASE_URL + "/test/checkNameAvailability?name=" + name,
+        url: API_BASE_URL + "/test/checkNameAvailability/" + name,
         method: 'GET'
     })
 }
 
 export function getAllTestResult(programmingName) {
     return request({
-        url: API_BASE_URL + "/test/results?name=" + programmingName,
+        url: API_BASE_URL + "/test/results/" + programmingName,
         method: 'GET'
     })
 }
@@ -149,14 +150,14 @@ export function signup(signupRequest) {
 
 export function checkUsernameAvailability(username) {
     return request({
-        url: API_BASE_URL + "/user/checkUsernameAvailability?username=" + username,
+        url: API_BASE_URL + "/user/checkUsernameAvailability/" + username,
         method: 'GET'
     });
 }
 
 export function checkEmailAvailability(email) {
     return request({
-        url: API_BASE_URL + "/user/checkEmailAvailability?email=" + email,
+        url: API_BASE_URL + "/user/checkEmailAvailability/" + email,
         method: 'GET'
     });
 }
