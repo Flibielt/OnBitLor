@@ -48,6 +48,11 @@ public class TestController {
     @PostMapping
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> addTestResult(@CurrentUser UserPrincipal currentUser, @RequestBody TestResultRequest request) {
+        if (!testService.existsByName(request.getName())) {
+            return ResponseEntity.badRequest()
+                    .body(new ApiResponse(false, "Cannot find the given test"));
+        }
+
         TestResultDto testResultDto = new TestResultDto();
         testResultDto.setDate(new Date());
         testResultDto.setTest(testService.findByName(request.getName()).getId());
