@@ -37,7 +37,7 @@ public class ProgrammingController {
         ProgrammingDto programmingDto = programmingService.save(request);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{gameId}")
+                .fromCurrentRequest().path("/{programmingId}")
                 .buildAndExpand(programmingDto.getId()).toUri();
 
         return ResponseEntity.created(location)
@@ -65,7 +65,6 @@ public class ProgrammingController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<?> addNewResult(@CurrentUser UserPrincipal userPrincipal, @RequestBody ProgrammingResultRequest request) {
         if (!programmingService.existsByName(request.getProgrammingName())) {
-            log.info("Programming name: " + request.getProgrammingName());
             return ResponseEntity.badRequest()
                     .body(new ApiResponse(false, "Cannot find the given programming competition"));
         }
