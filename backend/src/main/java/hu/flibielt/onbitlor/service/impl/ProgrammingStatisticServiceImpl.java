@@ -98,6 +98,8 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
         programmingStatistic.setPlayer(player);
         Programming programming = programmingRepository.getOne(programmingStatisticDto.getProgramming());
         programmingStatistic.setProgramming(programming);
+        programmingStatistic.setDate(programmingStatisticDto.getDate());
+        programmingStatistic.setScore(programmingStatisticDto.getScore());
 
         if (programmingStatisticDto.getPlayer() == null) {
             return null;

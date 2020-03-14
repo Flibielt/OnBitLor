@@ -66,6 +66,10 @@ class NewProgrammingResult extends Component {
         addProgrammingResult(resultData)
             .then(response => {
                 this.props.history.push("/");
+                notification.success({
+                    message: 'Bit calculator App',
+                    description: response.message || 'Saved successfully'
+                })
             }).catch(error => {
                 if (error.status === 401) {
                     this.props.handleLogout('/login', 'error', 'You have been logged out. Please login to add a new result.');
