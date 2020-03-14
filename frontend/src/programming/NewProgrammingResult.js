@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {getAllProgrammings} from "../util/APIUtils";
-import {Form, Select, Input, Button} from 'antd';
+import {addProgrammingResult, getAllProgrammings} from "../util/APIUtils";
+import {Form, Select, Input, Button, notification} from 'antd';
 import FormItem from "antd/es/form/FormItem";
 const { TextArea } = Input;
 const { Option } = Select;
@@ -61,7 +61,21 @@ class NewProgrammingResult extends Component {
         const resultData = {
             programmingName: this.state.selectedProgramming,
             score: this.state.result
-        }
+        };
+
+        addProgrammingResult(resultData)
+            .then(response => {
+                this.props.history.push("/");
+            }).catch(error => {
+                if (error.status === 401) {
+                    this.props.handleLogout('/login', 'error', 'You have been logged out. Please login to add a new result.');
+                } else {
+                    notification.error({
+                        message: 'Bit Calculator App',
+                        description: error.message || 'Sorry! Something went wrong. Please try again!'
+                    });
+                }
+        })
     }
 
     isFormInvalid() {

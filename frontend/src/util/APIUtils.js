@@ -39,6 +39,7 @@ export function addNewProgramming(programming) {
 }
 
 export function addProgrammingResult(resultData) {
+    console.log(JSON.stringify(resultData));
     return request({
         url: API_BASE_URL + "/programming/addResult",
         method: 'POST',
