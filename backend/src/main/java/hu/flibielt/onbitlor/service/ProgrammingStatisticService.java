@@ -2,6 +2,7 @@ package hu.flibielt.onbitlor.service;
 
 import hu.flibielt.onbitlor.dto.ProgrammingStatisticDto;
 import hu.flibielt.onbitlor.model.ProgrammingResultRequest;
+import hu.flibielt.onbitlor.model.ProgrammingStatisticResponse;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +21,6 @@ public interface ProgrammingStatisticService {
 
     ArrayList<ProgrammingStatisticDto> findAll();
 
-    ArrayList<ProgrammingStatisticDto> findAllInProgramming(String name);
+    ArrayList<ProgrammingStatisticResponse> findAllInProgramming(String name);
 
 }

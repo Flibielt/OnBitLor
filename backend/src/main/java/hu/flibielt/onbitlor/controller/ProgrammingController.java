@@ -2,10 +2,7 @@ package hu.flibielt.onbitlor.controller;
 
 import hu.flibielt.onbitlor.dto.ProgrammingDto;
 import hu.flibielt.onbitlor.dto.ProgrammingStatisticDto;
-import hu.flibielt.onbitlor.model.ApiResponse;
-import hu.flibielt.onbitlor.model.ProgrammingNameAvailability;
-import hu.flibielt.onbitlor.model.ProgrammingRequest;
-import hu.flibielt.onbitlor.model.ProgrammingResultRequest;
+import hu.flibielt.onbitlor.model.*;
 import hu.flibielt.onbitlor.security.CurrentUser;
 import hu.flibielt.onbitlor.security.UserPrincipal;
 import hu.flibielt.onbitlor.service.ProgrammingService;
@@ -93,7 +90,7 @@ public class ProgrammingController {
 
     @GetMapping("/results/{programming}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ArrayList<ProgrammingStatisticDto> getAllResultInCompetition(@PathVariable(value = "programming") String programming) {
+    public ArrayList<ProgrammingStatisticResponse> getAllResultInCompetition(@PathVariable(value = "programming") String programming) {
         return programmingStatisticService.findAllInProgramming(programming);
     }
 }

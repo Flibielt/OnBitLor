@@ -5,6 +5,7 @@ import hu.flibielt.onbitlor.dto.ProgrammingStatisticDto;
 import hu.flibielt.onbitlor.entity.Player;
 import hu.flibielt.onbitlor.entity.Programming;
 import hu.flibielt.onbitlor.entity.ProgrammingStatistic;
+import hu.flibielt.onbitlor.model.ProgrammingStatisticResponse;
 import hu.flibielt.onbitlor.repository.PlayerRepository;
 import hu.flibielt.onbitlor.repository.ProgrammingRepository;
 import hu.flibielt.onbitlor.repository.ProgrammingStatisticRepository;
@@ -75,10 +76,10 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
     }
 
     @Override
-    public ArrayList<ProgrammingStatisticDto> findAllInProgramming(String name) {
+    public ArrayList<ProgrammingStatisticResponse> findAllInProgramming(String name) {
         Long id = programmingRepository.findByName(name).getId();
         return Lists.newArrayList(programmingStatisticRepository.findAllByProgrammingIdOrderByScoreDesc(id)).stream()
-                .map(this::convertToDto)
+                .map(this::convertToStatisticResponse)
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
@@ -106,6 +107,17 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
         }
 
         return programmingStatistic;
+    }
+
+    private ProgrammingStatisticResponse convertToStatisticResponse(ProgrammingStatistic programmingStatistic) {
+        ProgrammingStatisticResponse response = new ProgrammingStatisticResponse();
+        response.setUsername(programmingStatistic.getPlayer().getUsername());
+        response.setFirstName(programmingStatistic.getPlayer().getFirstName());
+        response.setLastName(programmingStatistic.getPlayer().getLastName());
+        response.setDate(programmingStatistic.getDate());
+        response.setScore(programmingStatistic.getScore());
+
+        return response;
     }
 
 }
