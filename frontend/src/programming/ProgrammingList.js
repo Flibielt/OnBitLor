@@ -54,7 +54,18 @@ class ProgrammingList extends Component {
     }
 
     componentDidMount() {
+        this._mounted = true;
         this.loadProgrammingList();
+    }
+
+    componentWillUnmount () {
+        this._mounted = false
+    }
+
+    setState(state, callback) {
+        if (this._mounted) {
+            super.setState(state, callback);
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
