@@ -45,10 +45,13 @@ class ProgrammingResultList extends Component{
             });
             let resultViews = [];
             resultViews.length = 0;
+            let position = 0;
             this.state.results.forEach((result) => {
+                position++;
                 resultViews.push(<ProgrammingResult
                     key={result.id}
                     result={result}
+                    position={position}
                 />)
             });
             this.setState({
@@ -70,8 +73,8 @@ class ProgrammingResultList extends Component{
             this.setState({
                 selectedCompetition: value
             });
+            this.loadProgrammingResultList(value);
         }
-        this.loadProgrammingResultList(value);
     }
 
     componentDidMount() {
@@ -115,11 +118,11 @@ class ProgrammingResultList extends Component{
                 </h1>
                 <Form>
                     <FormItem>
-                        <Select
+                        <Select style={{fontSize: "large"}}
                             value={this.state.selectedCompetition}
                             onSelect={(value, key) => this.handleCompetitionChange(value, key)}>
                             {this.state.competitions.map(competition => (
-                                <Option
+                                <Option style={{fontSize: "large"}}
                                     key={competition.value}
                                     value={competition.display}>
                                     {competition.display}

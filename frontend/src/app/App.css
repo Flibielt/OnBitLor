@@ -12,3 +12,18 @@
   font-size: large;
   margin-bottom: 0;
 }
+
+.content {
+  display: table;
+}
+
+.position, .summary {
+  float: left;
+  text-align: left;
+}
+
+.summary {
+  padding-top: 0;
+  padding-left: 40px;
+  width: calc(100% - 120px);
+}
