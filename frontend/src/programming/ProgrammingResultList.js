@@ -57,6 +57,11 @@ class ProgrammingResultList extends Component{
             this.setState({
                 resultViews: resultViews
             });
+            if (position === 0) {
+                this.setState({
+                    resultViews: <h1>No results found</h1>
+                })
+            }
         }).catch(error => {
             this.setState({
                 isLoading: false
