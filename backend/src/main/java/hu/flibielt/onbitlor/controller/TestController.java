@@ -2,10 +2,7 @@ package hu.flibielt.onbitlor.controller;
 
 import hu.flibielt.onbitlor.dto.TestDto;
 import hu.flibielt.onbitlor.dto.TestResultDto;
-import hu.flibielt.onbitlor.model.ApiResponse;
-import hu.flibielt.onbitlor.model.TestNameAvailability;
-import hu.flibielt.onbitlor.model.TestRequest;
-import hu.flibielt.onbitlor.model.TestResultRequest;
+import hu.flibielt.onbitlor.model.*;
 import hu.flibielt.onbitlor.security.CurrentUser;
 import hu.flibielt.onbitlor.security.UserPrincipal;
 import hu.flibielt.onbitlor.service.TestResultService;
@@ -88,7 +85,7 @@ public class TestController {
 
     @GetMapping("/results/{name}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ArrayList<TestResultDto> findResultsByTest(@PathVariable(value = "name") String test) {
+    public ArrayList<TestStatisticResponse> findResultsByTest(@PathVariable(value = "name") String test) {
         return testResultService.findAll(test);
     }
 

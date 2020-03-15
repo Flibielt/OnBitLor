@@ -1,6 +1,7 @@
 package hu.flibielt.onbitlor.service;
 
 import hu.flibielt.onbitlor.dto.TestResultDto;
+import hu.flibielt.onbitlor.model.TestStatisticResponse;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,6 @@ public interface TestResultService {
 
     TestResultDto findById(Long playerId, Long testId);
 
-    ArrayList<TestResultDto> findAll(String testName);
+    ArrayList<TestStatisticResponse> findAll(String testName);
 
 }

@@ -6,6 +6,7 @@ import hu.flibielt.onbitlor.entity.Player;
 import hu.flibielt.onbitlor.entity.Test;
 import hu.flibielt.onbitlor.entity.TestResult;
 import hu.flibielt.onbitlor.entity.TestResultId;
+import hu.flibielt.onbitlor.model.TestStatisticResponse;
 import hu.flibielt.onbitlor.repository.PlayerRepository;
 import hu.flibielt.onbitlor.repository.TestRepository;
 import hu.flibielt.onbitlor.repository.TestResultRepository;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.lang.Long.sum;
 
 @Service
 public class TestResultServiceImpl implements TestResultService {
@@ -60,10 +63,10 @@ public class TestResultServiceImpl implements TestResultService {
     }
 
     @Override
-    public ArrayList<TestResultDto> findAll(String testName) {
+    public ArrayList<TestStatisticResponse> findAll(String testName) {
         Long testId = testRepository.findByName(testName).getId();
         return Lists.newArrayList(testResultRepository.findAllByTestIdOrderByResultDesc(testId)).stream()
-                .map(this::convertToDto)
+                .map(this::convertToTestStatisticResponse)
                 .collect(Collectors.toCollection(Lists::newArrayList));
     }
 
@@ -85,5 +88,18 @@ public class TestResultServiceImpl implements TestResultService {
         testResult.setDate(testResultDto.getDate());
         testResult.setResult(testResultDto.getResult());
         return testResult;
+    }
+
+    private TestStatisticResponse convertToTestStatisticResponse(TestResult testResult) {
+        TestStatisticResponse response = new TestStatisticResponse();
+        long playerId = testResult.getPlayer().getId();
+        long testId = testResult.getTest().getId();
+        response.setId(sum(playerId * 100, testId));
+        response.setUsername(testResult.getPlayer().getUsername());
+        response.setFirstName(testResult.getPlayer().getFirstName());
+        response.setLastName(testResult.getPlayer().getLastName());
+        response.setResult(testResult.getResult());
+        response.setDate(testResult.getDate());
+        return response;
     }
 }
