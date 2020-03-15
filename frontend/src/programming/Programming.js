@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import './Programming.css';
 
 class Programming extends Component {
     render() {
         return (
-            <div className="programming-content">
+            <div className="content">
                 <div className="programming-info">
-                    <h2 className="programming-name">
+                    <h2 className="name">
                         {this.props.programming.name}
                     </h2>
-                    <p className="programming-description">
+                    <p className="description">
                         {this.props.programming.description}
                     </p>
-                    <p className="programming-description">
+                    <p className="description">
                         Bit: {this.props.programming.bit}
                     </p>
                 </div>

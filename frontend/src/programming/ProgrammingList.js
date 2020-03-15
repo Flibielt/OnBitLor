@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { getAllProgrammings } from '../util/APIUtils';
 import Programming from './Programming';
 import LoadingIndicator  from '../common/LoadingIndicator';
-import { Button, Icon, notification } from 'antd';
 import { PROGRAMMING_LIST_SIZE } from '../constants';
 import { withRouter } from 'react-router-dom';
-import './ProgrammingList.css';
 
 class ProgrammingList extends Component {
     constructor(props) {

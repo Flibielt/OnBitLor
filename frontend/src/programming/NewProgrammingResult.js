@@ -98,7 +98,7 @@ class NewProgrammingResult extends Component {
 
     render() {
         return (
-            <div className="programming-container">
+            <div className="container">
                 <h1 className="page-title">New result</h1>
                 <div className="programming-content">
                     <Form onSubmit={this.handleSubmit} className="create-programming-form">
@@ -130,7 +130,7 @@ class NewProgrammingResult extends Component {
                                 value={this.state.result}
                                 onChange={this.handleResultChange} />
                         </FormItem>
-                        <FormItem>
+                        <FormItem style={{textAlign: "center"}}>
                             <Button type="primary"
                                     htmlType="submit"
                                     disabled={this.isFormInvalid()}
