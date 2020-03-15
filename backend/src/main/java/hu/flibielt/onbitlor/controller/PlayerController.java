@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 @Slf4j
 @CrossOrigin
 @RestController
@@ -24,7 +27,11 @@ public class PlayerController {
     @GetMapping("/me")
     @PreAuthorize("hasRole('ROLE_USER')")
     public PlayerSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        return new PlayerSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getBit());
+        ArrayList<String> authorities = new ArrayList<>();
+        for (int i = 0; i < currentUser.getAuthorities().size(); i++) {
+            authorities.add(currentUser.getAuthorities().stream().collect(Collectors.toCollection(ArrayList::new)).get(i).toString());
+        }
+        return new PlayerSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getBit(), authorities);
     }
 
     @GetMapping("/{username}")

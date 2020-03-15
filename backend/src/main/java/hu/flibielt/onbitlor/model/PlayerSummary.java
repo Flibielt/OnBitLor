@@ -3,6 +3,8 @@ package hu.flibielt.onbitlor.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+
 @Data
 @AllArgsConstructor
 public class PlayerSummary {
@@ -12,5 +14,6 @@ public class PlayerSummary {
     private String firstName;
     private String lastName;
     private Integer bit;
+    private ArrayList<String> authorities;
 
 }
