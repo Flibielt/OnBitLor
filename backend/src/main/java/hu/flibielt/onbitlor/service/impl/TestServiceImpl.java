@@ -32,9 +32,10 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public TestDto save(TestRequest request) {
-        TestDto testDto = new TestDto();
-        testDto.setName(request.getName());
-        Test test = convertToEntity(testDto);
+        Test test = new Test();
+        test.setName(request.getName());
+        test.setDescription(request.getDescription());
+        test.setBit(request.getBit());
         return convertToDto(testRepository.save(test));
     }
 
