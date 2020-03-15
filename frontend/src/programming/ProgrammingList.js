@@ -70,7 +70,7 @@ class ProgrammingList extends Component {
         if(this.props.isAuthenticated !== prevProps.isAuthenticated) {
             // Reset State
             this.setState({
-                polls: [],
+                tests: [],
                 page: 0,
                 size: 10,
                 totalElements: 0,
