@@ -1,63 +1,72 @@
 import React, {Component} from "react";
-import {Button, Form} from "antd";
-import TextArea from "antd/es/input/TextArea";
+import {Button, Form, Input, notification} from "antd";
 import FormItem from "antd/es/form/FormItem";
 import {withRouter} from "react-router-dom";
+import {addNewProgramming, checkProgrammingNameAvailability, checkUsernameAvailability} from "../util/APIUtils";
+import TextArea from "antd/es/input/TextArea";
 
 class NewProgramming extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            description: '',
-            bit: 0
+            competition: {
+                value: ''
+            },
+            description: {
+                value: ''
+            },
+            bit: {
+                value: ''
+            }
         };
 
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.handleBitChange = this.handleBitChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateCompetitionAvailability = this.validateCompetitionAvailability.bind(this);
+        this.isFormInvalid = this.isFormInvalid.bind(this);
     }
 
-    handleNameChange(event) {
-        if (event.target.value.length < 200) {
-            this.setState({
-                name: event.target.value
-            })
-        }
-    }
+    handleInputChange(event, validationFun) {
+        const target = event.target;
+        const inputName = target.name;
+        const inputValue = target.value;
 
-    handleDescriptionChange(event) {
-        if (event.target.value.length < 1000) {
-            this.setState({
-                description: event.target.value
-            })
-        }
-    }
-
-    handleBitChange(event) {
-        if (event.target.value.length < 20) {
-            if (!isNaN(event.target.value)) {
-                this.setState({
-                    bit: event.target.value
-                })
+        this.setState({
+            [inputName] : {
+                value: inputValue,
+                ...validationFun(inputValue)
             }
-        }
+        });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        const newProgramming = {
+            name: this.state.competition.value,
+            description: this.state.description.value,
+            bit: this.state.bit.value
+        };
+        addNewProgramming(newProgramming)
+            .then(response => {
+                notification.success({
+                    message: 'Bit Calculator App',
+                    description: "Programming competition saved successfully",
+                });
+                this.props.history.push("/");
+            }).catch(error => {
+            notification.error({
+                message: 'Bit Calculator App',
+                description: error.message || 'Sorry! Something went wrong. Please try again!'
+            });
+        })
     }
 
     isFormInvalid() {
-        if (this.state.name.length === 0) {
-            return true;
-        }
-        if (this.state.description === 0) {
-            return true;
-        }
-        if (this.state.bit.length === 0) {
-            return true;
-        }
-        if (isNaN(this.state.bit)) {
-            return true;
-        }
-        return this.state.bit <= 0;
+        return !(this.state.competition.validateStatus === 'success' &&
+            this.state.description.validateStatus === 'success' &&
+            this.state.bit.validateStatus === 'success'
+        );
     }
 
     render() {
@@ -66,36 +75,45 @@ class NewProgramming extends Component{
                 <h1>
                     Add new programming competition
                 </h1>
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                     <FormItem
-                        label="Name">
-                        <TextArea
-                            style={{resize: "none"}}
-                            placeholder="Enter the competition name"
-                            name="name"
-                            autoSize={{minRows: 1, maxRows: 1}}
-                            value={this.state.name}
-                            onChange={this.handleNameChange} />
+                        label="Name"
+                        validateStatus={this.state.competition.validateStatus}
+                        help={this.state.competition.errorMsg}>
+                        <Input
+                            size="large"
+                            name="competition"
+                            autoComplete="off"
+                            placeholder="The competition name"
+                            value={this.state.competition.value}
+                            onBlur={this.validateCompetitionAvailability}
+                            onChange={(event) => this.handleInputChange(event, this.validateCompetition)} />
                     </FormItem>
                     <FormItem
-                        label="Description">
+                        label="Description"
+                        validateStatus={this.state.description.validateStatus}
+                        help={this.state.description.errorMsg}>
                         <TextArea
-                            style={{resize: "none"}}
-                            placeholder="Enter the competition description"
+                            size="large"
                             name="description"
-                            autoSize={{minRows: 8, maxRows: 8}}
-                            value={this.state.description}
-                            onChange={this.handleDescriptionChange} />
+                            autoComplete="off"
+                            placeholder="The description of the competition"
+                            rows={4}
+                            style={{resize: "none"}}
+                            value={this.state.description.value}
+                            onChange={(event) => this.handleInputChange(event, this.validateDescription)} />
                     </FormItem>
                     <FormItem
-                        label="Bit">
-                        <TextArea
-                            style={{resize: "none"}}
-                            placeholder="Enter the bit award of the competition"
+                        label="Bit"
+                        validateStatus={this.state.bit.validateStatus}
+                        help={this.state.bit.errorMsg}>
+                        <Input
+                            size="large"
                             name="bit"
-                            autoSize={{minRows: 1, maxRows: 1}}
-                            value={this.state.bit}
-                            onChange={this.handleBitChange} />
+                            autoComplete="off"
+                            placeholder="The bit reward of the competition"
+                            value={this.state.bit.value}
+                            onChange={(event) => this.handleInputChange(event, this.validateBit)} />
                     </FormItem>
                     <FormItem className="formItem">
                         <Button type="primary"
@@ -109,6 +127,128 @@ class NewProgramming extends Component{
             </div>
         );
     }
+
+    validateCompetition = (competition) => {
+        if(competition.length < 3) {
+            return {
+                validateStatus: 'error',
+                errorMsg: `Competition is too short (Minimum 3 characters needed.)`
+            }
+        } else if (competition.length > 50) {
+            return {
+                validationStatus: 'error',
+                errorMsg: `Competition is too long (Maximum 50 characters allowed.)`
+            }
+        } else {
+            return {
+                validateStatus: 'success',
+                errorMsg: null,
+            };
+        }
+    };
+
+    validateCompetitionAvailability() {
+        // First check for client side errors in competition
+        const competitionValue = this.state.competition.value;
+        const competitionValidation = this.validateCompetition(competitionValue);
+
+        if(competitionValidation.validateStatus === 'error') {
+            this.setState({
+                competition: {
+                    value: competitionValue,
+                    ...competitionValidation
+                }
+            });
+            return;
+        }
+
+        this.setState({
+            competition: {
+                value: competitionValue,
+                validateStatus: 'validating',
+                errorMsg: null
+            }
+        });
+
+        checkProgrammingNameAvailability(competitionValue)
+            .then(response => {
+                console.log(response);
+                if(response.isAvailable) {
+                    this.setState({
+                        competition: {
+                            value: competitionValue,
+                            validateStatus: 'success',
+                            errorMsg: null
+                        }
+                    });
+                } else {
+                    this.setState({
+                        competition: {
+                            value: competitionValue,
+                            validateStatus: 'error',
+                            errorMsg: 'This competition name is already taken'
+                        }
+                    });
+                }
+            }).catch(error => {
+            // Marking validateStatus as success, Form will be rechecked at server
+            this.setState({
+                competition: {
+                    value: competitionValue,
+                    validateStatus: 'success',
+                    errorMsg: null
+                }
+            });
+        });
+    }
+
+    validateDescription = (description) => {
+        if(description.length < 3) {
+            return {
+                validateStatus: 'error',
+                errorMsg: `Description is too short (Minimum 3 characters needed.)`
+            }
+        } else if (description.length > 1000) {
+            return {
+                validationStatus: 'error',
+                errorMsg: `Description is too long (Maximum 1000 characters allowed.)`
+            }
+        } else {
+            return {
+                validateStatus: 'success',
+                errorMsg: null,
+            };
+        }
+    };
+
+    validateBit = (bit) => {
+        if(bit.length < 1) {
+            return {
+                validateStatus: 'error',
+                errorMsg: `Bit is too short (Minimum 1 characters needed.)`
+            }
+        } else if (bit.length > 20) {
+            return {
+                validationStatus: 'error',
+                errorMsg: `Bit is too long (Maximum 20 characters allowed.)`
+            }
+        } else if (isNaN(bit)) {
+            return {
+                validationStatus: 'error',
+                errorMsg: `Must be a number`
+            }
+        } else if (bit < 0) {
+            return {
+                validationStatus: 'error',
+                errorMsg: `Must be bigger than 0`
+            }
+        } else {
+            return {
+                validateStatus: 'success',
+                errorMsg: null,
+            };
+        }
+    };
 }
 
 export default withRouter(NewProgramming);
