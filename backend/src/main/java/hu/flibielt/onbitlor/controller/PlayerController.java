@@ -44,14 +44,14 @@ public class PlayerController {
         return playerDto;
     }
 
-    @GetMapping("/checkUsernameAvailability")
-    public PlayerIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
-        Boolean isAvailable = !playerService.existsByEmail(username);
+    @GetMapping("/checkUsernameAvailability/{username}")
+    public PlayerIdentityAvailability checkUsernameAvailability(@PathVariable(value = "username") String username) {
+        Boolean isAvailable = !playerService.existsByUsername(username);
         return new PlayerIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/checkEmailAvailability")
-    public PlayerIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
+    @GetMapping("/checkEmailAvailability/{email}")
+    public PlayerIdentityAvailability checkEmailAvailability(@PathVariable(value = "email") String email) {
         Boolean isAvailable = !playerService.existsByEmail(email);
         return new PlayerIdentityAvailability(isAvailable);
     }
