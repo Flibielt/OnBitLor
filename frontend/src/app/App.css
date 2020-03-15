@@ -27,3 +27,7 @@
   padding-left: 40px;
   width: calc(100% - 120px);
 }
+
+.formItem {
+  text-align: center;
+}

@@ -74,7 +74,7 @@ function ProfileDropdownMenu(props) {
 
     let addNew = null;
     if (props.currentUser.authorities.includes("ROLE_ADMIN")) {
-        addNew = <Link to={`/users/${props.currentUser.username}`}>Admin</Link>;
+        addNew = <Link to={`/admin`}>Admin</Link>;
     }
 
   const dropdownMenu = (

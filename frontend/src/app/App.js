@@ -9,9 +9,6 @@ import {
 import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 
-import PollList from '../poll/PollList';
-import NewPoll from '../poll/NewPoll';
-import NewProgrammingResult from '../programming/NewProgrammingResult'
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
@@ -23,6 +20,7 @@ import PrivateRoute from '../common/PrivateRoute';
 import { Layout, notification } from 'antd';
 import ProgrammingList from "../programming/ProgrammingList";
 import ProgrammingResultList from "../programming/ProgrammingResultList";
+import NewProgramming from "../programming/NewProgramming";
 const { Content } = Layout;
 
 class App extends Component {
@@ -31,6 +29,7 @@ class App extends Component {
     this.state = {
       currentUser: null,
       isAuthenticated: false,
+      isAdmin: false,
       isLoading: false
     };
     this.handleLogout = this.handleLogout.bind(this);
@@ -55,6 +54,11 @@ class App extends Component {
         isAuthenticated: true,
         isLoading: false
       });
+      if (this.state.currentUser.authorities.includes("ROLE_ADMIN")) {
+        this.setState({
+          isAdmin: true
+        })
+      }
     }).catch(error => {
       this.setState({
         isLoading: false
@@ -71,7 +75,8 @@ class App extends Component {
 
     this.setState({
       currentUser: null,
-      isAuthenticated: false
+      isAuthenticated: false,
+      isAdmin: false
     });
 
     this.props.history.push(redirectTo);
@@ -113,6 +118,9 @@ class App extends Component {
                 <Route path="/signup" component={Signup}/>
                 <Route authenticated={this.state.isAuthenticated} path="/users/:username"
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
+                </Route>
+                <Route authenticated={this.state.isAdmin} path="/admin"
+                       render={(props) => <NewProgramming isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={ProgrammingResultList} handleLogout={this.handleLogout}/>
                 <Route component={NotFound}/>
