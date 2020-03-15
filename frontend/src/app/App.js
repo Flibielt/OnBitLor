@@ -122,7 +122,7 @@ class App extends Component {
                 <Route authenticated={this.state.isAdmin} path="/admin"
                        render={(props) => <NewProgramming isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={ProgrammingResultList} handleLogout={this.handleLogout}/>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/stat" component={ProgrammingResultList} handleLogout={this.handleLogout}/>
                 <Route component={NotFound}/>
               </Switch>
             </div>
