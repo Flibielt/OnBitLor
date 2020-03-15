@@ -19,6 +19,12 @@ class Signup extends Component {
             name: {
                 value: ''
             },
+            firstName: {
+                value: ''
+            },
+            lastName: {
+                value: ''
+            },
             username: {
                 value: ''
             },
@@ -53,7 +59,8 @@ class Signup extends Component {
         event.preventDefault();
     
         const signupRequest = {
-            name: this.state.name.value,
+            firstName: this.state.firstName.value,
+            lastName: this.state.lastName.value,
             email: this.state.email.value,
             username: this.state.username.value,
             password: this.state.password.value
@@ -74,7 +81,8 @@ class Signup extends Component {
     }
 
     isFormInvalid() {
-        return !(this.state.name.validateStatus === 'success' &&
+        return !(this.state.firstName.validateStatus === 'success' &&
+            this.state.lastName.validateStatus === 'success' &&
             this.state.username.validateStatus === 'success' &&
             this.state.email.validateStatus === 'success' &&
             this.state.password.validateStatus === 'success'
@@ -88,16 +96,28 @@ class Signup extends Component {
                 <div className="signup-content">
                     <Form onSubmit={this.handleSubmit} className="signup-form">
                         <FormItem 
-                            label="Full Name"
-                            validateStatus={this.state.name.validateStatus}
-                            help={this.state.name.errorMsg}>
+                            label="First Name"
+                            validateStatus={this.state.firstName.validateStatus}
+                            help={this.state.firstName.errorMsg}>
                             <Input 
                                 size="large"
-                                name="name"
+                                name="firstName"
                                 autoComplete="off"
-                                placeholder="Your full name"
-                                value={this.state.name.value} 
-                                onChange={(event) => this.handleInputChange(event, this.validateName)} />    
+                                placeholder="Your first name"
+                                value={this.state.firstName.value}
+                                onChange={(event) => this.handleInputChange(event, this.validateFirstName)} />
+                        </FormItem>
+                        <FormItem
+                            label="Last Name"
+                            validateStatus={this.state.lastName.validateStatus}
+                            help={this.state.lastName.errorMsg}>
+                            <Input
+                                size="large"
+                                name="lastName"
+                                autoComplete="off"
+                                placeholder="Your first name"
+                                value={this.state.lastName.value}
+                                onChange={(event) => this.handleInputChange(event, this.validateLastName)} />
                         </FormItem>
                         <FormItem label="Username"
                             hasFeedback
@@ -156,7 +176,7 @@ class Signup extends Component {
 
     // Validation Functions
 
-    validateName = (name) => {
+    validateFirstName = (name) => {
         if(name.length < NAME_MIN_LENGTH) {
             return {
                 validateStatus: 'error',
@@ -173,7 +193,26 @@ class Signup extends Component {
                 errorMsg: null,
               };            
         }
-    }
+    };
+
+    validateLastName = (name) => {
+        if(name.length < NAME_MIN_LENGTH) {
+            return {
+                validateStatus: 'error',
+                errorMsg: `Name is too short (Minimum ${NAME_MIN_LENGTH} characters needed.)`
+            }
+        } else if (name.length > NAME_MAX_LENGTH) {
+            return {
+                validationStatus: 'error',
+                errorMsg: `Name is too long (Maximum ${NAME_MAX_LENGTH} characters allowed.)`
+            }
+        } else {
+            return {
+                validateStatus: 'success',
+                errorMsg: null,
+            };
+        }
+    };
 
     validateEmail = (email) => {
         if(!email) {
@@ -202,7 +241,7 @@ class Signup extends Component {
             validateStatus: null,
             errorMsg: null
         }
-    }
+    };
 
     validateUsername = (username) => {
         if(username.length < USERNAME_MIN_LENGTH) {
@@ -221,7 +260,7 @@ class Signup extends Component {
                 errorMsg: null
             }
         }
-    }
+    };
 
     validateUsernameAvailability() {
         // First check for client side errors in username
