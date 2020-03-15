@@ -34,7 +34,7 @@ export function addNewProgramming(programming) {
     return request({
         url: API_BASE_URL + "/programming",
         method: 'POST',
-        body: programming
+        body: JSON.stringify(programming)
     })
 }
 
@@ -72,7 +72,7 @@ export function addNewTest(test) {
     return request({
         url: API_BASE_URL + "/test/new",
         method: 'POST',
-        body: test
+        body: JSON.stringify(test)
     })
 }
 
