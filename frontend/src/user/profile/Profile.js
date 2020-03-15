@@ -3,14 +3,12 @@ import PollList from '../../poll/PollList';
 import { getUserProfile } from '../../util/APIUtils';
 import { Avatar, Tabs } from 'antd';
 import { getAvatarColor } from '../../util/Colors';
-import { formatDate } from '../../util/Helpers';
 import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
 import ProgrammingList from "../../programming/ProgrammingList";
 import NewProgrammingResult from "../../programming/NewProgrammingResult";
-import BrowserRouter from "react-router-dom/BrowserRouter";
 
 const TabPane = Tabs.TabPane;
 
@@ -20,7 +18,7 @@ class Profile extends Component {
         this.state = {
             user: null,
             isLoading: false
-        }
+        };
         this.loadUserProfile = this.loadUserProfile.bind(this);
     }
 
@@ -85,14 +83,14 @@ class Profile extends Component {
                         <div className="user-profile">
                             <div className="user-details">
                                 <div className="user-avatar">
-                                    <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.state.user.firstName)}}>
-                                        {this.state.user.firstName[0].toUpperCase()}
+                                    <Avatar className="user-avatar-circle" style={{ backgroundColor: getAvatarColor(this.state.user.username)}}>
+                                        {this.state.user.username[0].toUpperCase()}
                                     </Avatar>
                                 </div>
                                 <div className="user-summary">
                                     <div className="full-name">{this.state.user.firstName} {this.state.user.lastName}</div>
                                     <div className="username">{this.state.user.username}</div>
-                                    <div className="user-joined">
+                                    <div className="description">
                                         Bits: {this.state.user.bit}
                                     </div>
                                 </div>
