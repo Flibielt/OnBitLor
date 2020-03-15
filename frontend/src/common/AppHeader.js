@@ -72,9 +72,9 @@ class AppHeader extends Component {
 
 function ProfileDropdownMenu(props) {
 
-    let addNew = null;
+    let adminMenuItem = null;
     if (props.currentUser.authorities.includes("ROLE_ADMIN")) {
-        addNew = <Link to={`/admin`}>Admin</Link>;
+        adminMenuItem = <Menu.Item key="admin" className="dropdown-item"><Link to={`/admin`}>Admin</Link></Menu.Item>;
     }
 
   const dropdownMenu = (
@@ -91,9 +91,7 @@ function ProfileDropdownMenu(props) {
       <Menu.Item key="profile" className="dropdown-item">
         <Link to={`/users/${props.currentUser.username}`}>Profile</Link>
       </Menu.Item>
-      <Menu.Item key="admin" className="dropdown-item">
-        {addNew}
-      </Menu.Item>
+      {adminMenuItem}
       <Menu.Item key="logout" className="dropdown-item">
         Logout
       </Menu.Item>
