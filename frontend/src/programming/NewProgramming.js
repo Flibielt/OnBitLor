@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Button, Form, Input, notification} from "antd";
 import FormItem from "antd/es/form/FormItem";
 import {withRouter} from "react-router-dom";
-import {addNewProgramming, checkProgrammingNameAvailability, checkUsernameAvailability} from "../util/APIUtils";
+import {addNewProgramming, checkProgrammingNameAvailability} from "../util/APIUtils";
 import TextArea from "antd/es/input/TextArea";
 
 class NewProgramming extends Component{
