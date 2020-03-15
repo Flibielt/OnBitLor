@@ -54,7 +54,7 @@ public class ProgrammingController {
     @GetMapping("/checkNameAvailability/{name}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ProgrammingNameAvailability checkNameAvailability(@PathVariable(value = "name") String name) {
-        Boolean isAvailable = programmingService.existsByName(name);
+        Boolean isAvailable = !programmingService.existsByName(name);
         return new ProgrammingNameAvailability(isAvailable);
     }
 

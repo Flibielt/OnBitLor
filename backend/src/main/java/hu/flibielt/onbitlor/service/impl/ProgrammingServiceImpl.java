@@ -33,13 +33,10 @@ public class ProgrammingServiceImpl implements ProgrammingService {
 
     @Override
     public ProgrammingDto save(ProgrammingRequest programmingRequest) {
-        ProgrammingDto programmingDto = new ProgrammingDto();
-        programmingDto.setGameId(programmingRequest.getGameId());
-        programmingDto.setName(programmingRequest.getName());
-        Programming programming = convertToEntity(programmingDto);
-        if (programming == null) {
-            return null;
-        }
+        Programming programming = new Programming();
+        programming.setName(programmingRequest.getName());
+        programming.setDescription(programmingRequest.getDescription());
+        programming.setBit(programmingRequest.getBit());
         return convertToDto(programmingRepository.save(programming));
     }
 

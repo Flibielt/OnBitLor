@@ -8,9 +8,11 @@ import javax.validation.constraints.Size;
 @Data
 public class ProgrammingRequest {
     @NotBlank
-    private Long gameId;
+    private String name;
 
     @NotBlank
-    @Size(max = 255)
-    private String name;
+    private String description;
+
+    @NotBlank
+    private Integer bit;
 }
