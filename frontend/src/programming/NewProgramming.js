@@ -63,14 +63,12 @@ class NewProgramming extends Component{
     render() {
         return (
             <div className="container">
-                <h1 className="title">
+                <h1>
                     Add new programming competition
                 </h1>
                 <Form>
-                    <h2>
-                        Name
-                    </h2>
-                    <FormItem>
+                    <FormItem
+                        label="Name">
                         <TextArea
                             style={{resize: "none"}}
                             placeholder="Enter the competition name"
@@ -79,10 +77,8 @@ class NewProgramming extends Component{
                             value={this.state.name}
                             onChange={this.handleNameChange} />
                     </FormItem>
-                    <h2>
-                        Description
-                    </h2>
-                    <FormItem>
+                    <FormItem
+                        label="Description">
                         <TextArea
                             style={{resize: "none"}}
                             placeholder="Enter the competition description"
@@ -91,10 +87,8 @@ class NewProgramming extends Component{
                             value={this.state.description}
                             onChange={this.handleDescriptionChange} />
                     </FormItem>
-                    <h2>
-                        Bit
-                    </h2>
-                    <FormItem>
+                    <FormItem
+                        label="Bit">
                         <TextArea
                             style={{resize: "none"}}
                             placeholder="Enter the bit award of the competition"

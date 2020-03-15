@@ -53,7 +53,7 @@ class AppHeader extends Component {
 
         return (
             <Header className="app-header">
-            <div className="container">
+            <div className="header-container">
               <div className="app-title" >
                 <Link to="/">Online Bit Calculator</Link>
               </div>
