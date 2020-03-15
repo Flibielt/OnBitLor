@@ -6,8 +6,8 @@ import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
 import NotFound from '../../common/NotFound';
 import ServerError from '../../common/ServerError';
-import ProgrammingList from "../../programming/ProgrammingList";
 import NewProgrammingResult from "../../programming/NewProgrammingResult";
+import NewTestResult from "../../test/NewTestResult";
 
 const TabPane = Tabs.TabPane;
 
@@ -103,10 +103,8 @@ class Profile extends Component {
                                     <TabPane tab={`New programming result`} key="1">
                                         <NewProgrammingResult />
                                     </TabPane>
-                                    <TabPane tab={`Programming`}  key="2">
-                                        <ProgrammingList/>
-                                    </TabPane>
-                                    <TabPane tab={`Tests`}  key="3">
+                                    <TabPane tab={`New test result`}  key="2">
+                                        <NewTestResult/>
                                     </TabPane>
                                 </Tabs>
                             </div>  

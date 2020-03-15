@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {addTestResult, getAllTestResult} from "../util/APIUtils";
+import {addTestResult, getAllTests} from "../util/APIUtils";
 import {Form, Select, Input, Button, notification} from 'antd';
 import FormItem from "antd/es/form/FormItem";
 import {withRouter} from "react-router-dom";
@@ -24,13 +24,13 @@ class NewTestResult extends Component {
     }
 
     componentDidMount() {
-        getAllTestResult()
+        getAllTests()
             .then(data => {
                 let testsFromAPI = data.map(test => {
                     return { value: test.id, display: test.name};
                 });
                 this.setState({
-                    programmings: [{
+                    tests: [{
                         value: 0,
                         display: "(Select a test)"
                     }].concat(testsFromAPI)
@@ -60,7 +60,7 @@ class NewTestResult extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const resultData = {
-            testName: this.state.selectedTest,
+            name: this.state.selectedTest,
             score: this.state.result
         };
 
@@ -106,7 +106,7 @@ class NewTestResult extends Component {
                             <Select
                                 value={this.state.selectedTest}
                                 onSelect={(value, key) => this.handleChange(value, key)}>
-                                {this.state.test.map(test => (
+                                {this.state.tests.map(test => (
                                     <Option
                                         key = {test.value}
                                         value = {test.display}>
