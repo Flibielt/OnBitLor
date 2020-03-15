@@ -42,7 +42,18 @@ class ProgrammingResultList extends Component{
             this.setState({
                 results: results.concat(response),
                 isLoading: false
-            })
+            });
+            let resultViews = [];
+            resultViews.length = 0;
+            this.state.results.forEach((result) => {
+                resultViews.push(<ProgrammingResult
+                    key={result.id}
+                    result={result}
+                />)
+            });
+            this.setState({
+                resultViews: resultViews
+            });
         }).catch(error => {
             this.setState({
                 isLoading: false
@@ -52,19 +63,6 @@ class ProgrammingResultList extends Component{
                 description: error.message
             });
         });
-
-        let resultViews = [];
-        resultViews.length = 0;
-        this.state.results.forEach((result) => {
-            resultViews.push(<ProgrammingResult
-                key={result.id}
-                result={result}
-            />)
-        });
-        this.setState({
-            resultViews: resultViews
-        });
-        console.log(this.state.resultViews);
     }
 
     handleCompetitionChange(value) {

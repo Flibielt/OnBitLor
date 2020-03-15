@@ -55,7 +55,6 @@ export function checkProgrammingNameAvailability(name) {
 }
 
 export function getAllProgrammingResult(programmingName) {
-    console.log(API_BASE_URL + "/programming/results/" + programmingName);
     return request({
         url: API_BASE_URL + "/programming/results/" + programmingName,
         method: 'GET'
@@ -165,10 +164,8 @@ export function checkEmailAvailability(email) {
 
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
-        console.log("No acces token set.");
         return Promise.reject("No access token set.");
     }
-    console.log("Access token set.");
 
     return request({
         url: API_BASE_URL + "/player/me",
