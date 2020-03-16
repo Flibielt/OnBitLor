@@ -72,9 +72,6 @@ class NewTest extends Component {
     render() {
         return (
             <div className="container">
-                <h1>
-                    Add new programming competition
-                </h1>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         label="Name"
