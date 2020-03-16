@@ -71,7 +71,7 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public ArrayList<PlayerInfoResponse> getAll() {
-        return Lists.newArrayList(playerRepository.findAll()).stream()
+        return Lists.newArrayList(playerRepository.findAllOrderByBit()).stream()
                 .map(this::convertToPlayerInfo).collect(Collectors.toCollection(Lists::newArrayList));
     }
 
