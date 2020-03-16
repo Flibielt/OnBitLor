@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {formatDateTime} from "../util/Helpers";
 
 class ProgrammingResult extends Component{
     render() {
@@ -21,7 +22,7 @@ class ProgrammingResult extends Component{
                         {this.props.result.firstName} {this.props.result.lastName}
                     </p>
                     <p className="description">
-                        {this.props.result.date}
+                        {formatDateTime(this.props.result.date)}
                     </p>
                 </div>
             </div>
