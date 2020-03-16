@@ -92,7 +92,7 @@ public class TestController {
     @GetMapping("/checkNameAvailability/{name}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public TestNameAvailability checkNameAvailability(@PathVariable(value = "name") String name) {
-        Boolean isAvailable = testService.existsByName(name);
+        Boolean isAvailable = !testService.existsByName(name);
         return new TestNameAvailability(isAvailable);
     }
 
