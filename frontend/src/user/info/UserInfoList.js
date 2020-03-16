@@ -96,9 +96,6 @@ class UserInfoList extends Component {
 
         return (
             <div className="programmings-container">
-                <h1 className="title">
-                    All user
-                </h1>
                 {userViews}
                 {
                     !this.state.isLoading && this.state.users.length === 0 ? (

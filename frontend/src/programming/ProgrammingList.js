@@ -97,9 +97,6 @@ class ProgrammingList extends Component {
 
         return (
             <div className="programmings-container">
-                <h1 className="title">
-                    Programming competitions
-                </h1>
                 {programmingViews}
                 {
                     !this.state.isLoading && this.state.programmings.length === 0 ? (

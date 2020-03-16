@@ -98,9 +98,6 @@ class TestList extends Component {
 
         return (
             <div className="tests-container">
-                <h1 className="title">
-                    Programming competitions
-                </h1>
                 {testViews}
                 {
                     !this.state.isLoading && this.state.tests.length === 0 ? (
