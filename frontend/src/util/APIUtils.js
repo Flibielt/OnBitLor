@@ -1,4 +1,4 @@
-import {API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN, PROGRAMMING_LIST_SIZE} from '../constants';
+import {API_BASE_URL, ACCESS_TOKEN, PROGRAMMING_LIST_SIZE} from '../constants';
 
 const request = async (options) => {
     const headers = new Headers({

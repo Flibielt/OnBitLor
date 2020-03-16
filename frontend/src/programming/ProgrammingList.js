@@ -70,13 +70,12 @@ class ProgrammingList extends Component {
         if(this.props.isAuthenticated !== prevProps.isAuthenticated) {
             // Reset State
             this.setState({
-                tests: [],
+                programmings: [],
                 page: 0,
                 size: 10,
                 totalElements: 0,
                 totalPages: 0,
                 last: true,
-                currentVotes: [],
                 isLoading: false
             });
             this.loadProgrammingList();
