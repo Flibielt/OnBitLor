@@ -146,3 +146,10 @@ export function getUserProfile(username) {
         method: 'GET'
     });
 }
+
+export function getAllUser() {
+    return request({
+        url: API_BASE_URL + "/player",
+        method: 'GET'
+    })
+}
