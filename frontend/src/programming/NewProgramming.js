@@ -169,7 +169,6 @@ class NewProgramming extends Component{
 
         checkProgrammingNameAvailability(competitionValue)
             .then(response => {
-                console.log(response);
                 if(response.isAvailable) {
                     this.setState({
                         competition: {
