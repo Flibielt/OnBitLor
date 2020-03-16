@@ -12,6 +12,14 @@ class OverallList extends Component {
             textAlign: 'center'
         };
 
+        if (!this.props.isAuthenticated) {
+            return (
+                <h1 className="formItem">
+                    Please login to use the webapp
+                </h1>
+            );
+        }
+
         return (
             <div className="container">
                 <Tabs defaultActiveKey="1"

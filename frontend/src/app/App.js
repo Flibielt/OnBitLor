@@ -101,24 +101,6 @@ class App extends Component {
       return <LoadingIndicator />
     }
 
-    if (!this.state.isAuthenticated) {
-      return (
-          <Layout className="app-container">
-            <AppHeader isAuthenticated={this.state.isAuthenticated}
-                       currentUser={this.state.currentUser}
-                       onLogout={this.handleLogout} />
-
-            <Content className="app-content">
-              <div className="container">
-                <h1 className="formItem">
-                  Please login to use the webapp
-                </h1>
-              </div>
-            </Content>
-          </Layout>
-      );
-    }
-
     return (
         <Layout className="app-container">
           <AppHeader isAuthenticated={this.state.isAuthenticated} 
