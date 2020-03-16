@@ -18,9 +18,9 @@ import LoadingIndicator from '../common/LoadingIndicator';
 import PrivateRoute from '../common/PrivateRoute';
 
 import { Layout, notification } from 'antd';
-import ProgrammingList from "../programming/ProgrammingList";
 import ProgrammingResultList from "../programming/ProgrammingResultList";
 import NewProgramming from "../programming/NewProgramming";
+import OverallList from "../parts/OverallList";
 const { Content } = Layout;
 
 class App extends Component {
@@ -110,7 +110,7 @@ class App extends Component {
             <div className="container">
               <Switch>      
                 <Route exact path="/" 
-                  render={(props) => <ProgrammingList isAuthenticated={this.state.isAuthenticated}
+                  render={(props) => <OverallList isAuthenticated={this.state.isAuthenticated}
                       currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                 </Route>
                 <Route path="/login"
