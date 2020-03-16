@@ -1,20 +1,10 @@
-
-export function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    const monthNames = [
-      "January", "February", "March",
-      "April", "May", "June", "July",
-      "August", "September", "October",
-      "November", "December"
-    ];
-  
-    const monthIndex = date.getMonth();
-    const year = date.getFullYear();
-  
-    return monthNames[monthIndex] + ' ' + year;
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
 }
-  
+
 export function formatDateTime(dateTimeString) {
   const date = new Date(dateTimeString);
 
@@ -27,5 +17,5 @@ export function formatDateTime(dateTimeString) {
   const monthIndex = date.getMonth();
   const year = date.getFullYear();
 
-  return date.getDate() + ' ' + monthNames[monthIndex] + ' ' + year + ' - ' + date.getHours() + ':' + date.getMinutes();
+  return (year + ". " + monthNames[monthIndex] + '. ' + date.getDate() + '. ' + addZero(date.getHours()) + ':' + addZero(date.getMinutes())).toString();
 }  
