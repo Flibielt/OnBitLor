@@ -91,6 +91,7 @@ public class AuthController {
         player.setLastName(signUpRequest.getLastName());
         player.setUsername(signUpRequest.getUsername());
         player.setEmail(signUpRequest.getEmail());
+        player.setBit(0);
 
         player.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
