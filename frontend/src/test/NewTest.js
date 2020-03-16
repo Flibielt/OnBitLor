@@ -43,7 +43,7 @@ class NewTest extends Component {
         event.preventDefault();
 
         const newProgramming = {
-            name: this.state.competition.value,
+            name: this.state.test.value,
             description: this.state.description.value,
             bit: this.state.bit.value
         };
@@ -117,7 +117,7 @@ class NewTest extends Component {
                                 htmlType="submit"
                                 disabled={this.isFormInvalid()}
                                 size="large">
-                            Add new competition
+                            Add new test
                         </Button>
                     </FormItem>
                 </Form>
@@ -145,7 +145,7 @@ class NewTest extends Component {
     };
 
     validateTestAvailability() {
-        // First check for client side errors in competition
+        // First check for client side errors in test
         const testValue = this.state.test.value;
         const testValidation = this.validateTest(testValue);
 
@@ -171,7 +171,7 @@ class NewTest extends Component {
             .then(response => {
                 if(response.isAvailable) {
                     this.setState({
-                        competition: {
+                        test: {
                             value: testValue,
                             validateStatus: 'success',
                             errorMsg: null
@@ -179,7 +179,7 @@ class NewTest extends Component {
                     });
                 } else {
                     this.setState({
-                        competition: {
+                        test: {
                             value: testValue,
                             validateStatus: 'error',
                             errorMsg: 'This test name is already taken'
@@ -189,7 +189,7 @@ class NewTest extends Component {
             }).catch(error => {
             // Marking validateStatus as success, Form will be rechecked at server
             this.setState({
-                competition: {
+                test: {
                     value: testValue,
                     validateStatus: 'success',
                     errorMsg: null
