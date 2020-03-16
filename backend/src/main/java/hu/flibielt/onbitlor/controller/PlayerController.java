@@ -3,6 +3,7 @@ package hu.flibielt.onbitlor.controller;
 import hu.flibielt.onbitlor.dto.PlayerDto;
 import hu.flibielt.onbitlor.exception.ResourceNotFoundException;
 import hu.flibielt.onbitlor.model.PlayerIdentityAvailability;
+import hu.flibielt.onbitlor.model.PlayerInfoResponse;
 import hu.flibielt.onbitlor.model.PlayerSummary;
 import hu.flibielt.onbitlor.security.CurrentUser;
 import hu.flibielt.onbitlor.security.UserPrincipal;
@@ -42,6 +43,12 @@ public class PlayerController {
             throw new ResourceNotFoundException("Player", "username", username);
         }
         return playerDto;
+    }
+
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ArrayList<PlayerInfoResponse> getAllPlayer() {
+        return playerService.getAll();
     }
 
     @GetMapping("/checkUsernameAvailability/{username}")

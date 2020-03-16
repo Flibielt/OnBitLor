@@ -3,6 +3,7 @@ package hu.flibielt.onbitlor.service.impl;
 import com.google.common.collect.Lists;
 import hu.flibielt.onbitlor.dto.PlayerDto;
 import hu.flibielt.onbitlor.entity.Player;
+import hu.flibielt.onbitlor.model.PlayerInfoResponse;
 import hu.flibielt.onbitlor.repository.PlayerRepository;
 import hu.flibielt.onbitlor.service.PlayerService;
 import org.modelmapper.ModelMapper;
@@ -69,6 +70,12 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public ArrayList<PlayerInfoResponse> getAll() {
+        return Lists.newArrayList(playerRepository.findAll()).stream()
+                .map(this::convertToPlayerInfo).collect(Collectors.toCollection(Lists::newArrayList));
+    }
+
+    @Override
     public Boolean existsByUsername(String username) {
         return playerRepository.existsByUsername(username);
     }
@@ -90,6 +97,15 @@ public class PlayerServiceImpl implements PlayerService {
         }
 
         return player;
+    }
 
+    private PlayerInfoResponse convertToPlayerInfo(Player player) {
+        PlayerInfoResponse response = new PlayerInfoResponse();
+        response.setId(player.getId());
+        response.setFirstName(player.getFirstName());
+        response.setLastName(player.getLastName());
+        response.setUsername(player.getUsername());
+        response.setBit(player.getBit());
+        return response;
     }
 }
