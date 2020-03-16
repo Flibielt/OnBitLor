@@ -15,12 +15,11 @@ import Profile from '../user/profile/Profile';
 import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
-import PrivateRoute from '../common/PrivateRoute';
 
 import { Layout, notification } from 'antd';
-import ProgrammingResultList from "../programming/ProgrammingResultList";
 import NewProgramming from "../programming/NewProgramming";
 import OverallList from "../parts/OverallList";
+import Statistics from "../parts/Statistics";
 const { Content } = Layout;
 
 class App extends Component {
@@ -123,7 +122,10 @@ class App extends Component {
                 <Route authenticated={this.state.isAdmin} path="/admin"
                        render={(props) => <NewProgramming isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/stat" component={ProgrammingResultList} handleLogout={this.handleLogout}/>
+                <Route exact path="/stat"
+                       render={(props) => <Statistics isAuthenticated={this.state.isAuthenticated}
+                                                       currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
+                </Route>
                 <Route component={NotFound}/>
               </Switch>
             </div>
