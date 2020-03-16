@@ -17,9 +17,9 @@ import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
 
 import { Layout, notification } from 'antd';
-import NewProgramming from "../programming/NewProgramming";
 import OverallList from "../parts/OverallList";
 import Statistics from "../parts/Statistics";
+import Admin from "../parts/Admin";
 const { Content } = Layout;
 
 class App extends Component {
@@ -120,7 +120,7 @@ class App extends Component {
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <Route authenticated={this.state.isAdmin} path="/admin"
-                       render={(props) => <NewProgramming isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
+                       render={(props) => <Admin isAuthenticated={this.state.isAdmin} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <Route exact path="/stat"
                        render={(props) => <Statistics isAuthenticated={this.state.isAuthenticated}
