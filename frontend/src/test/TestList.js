@@ -89,10 +89,10 @@ class TestList extends Component {
 
     render() {
         const testViews = [];
-        this.state.programmings.forEach((test, testIndex) =>{
+        this.state.tests.forEach((test, testIndex) =>{
             testViews.push(<Test
                 key={test.id}
-                programming={test}
+                test={test}
             />)
         });
 
@@ -103,7 +103,7 @@ class TestList extends Component {
                 </h1>
                 {testViews}
                 {
-                    !this.state.isLoading && this.state.programmings.length === 0 ? (
+                    !this.state.isLoading && this.state.tests.length === 0 ? (
                         <div className="no-tests-found">
                             <span>No Tests Found.</span>
                         </div>
