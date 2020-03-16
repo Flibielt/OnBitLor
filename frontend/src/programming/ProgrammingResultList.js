@@ -118,9 +118,6 @@ class ProgrammingResultList extends Component{
     render() {
         return (
             <div className="container">
-                <h1 className="title">
-                    Programming competition results
-                </h1>
                 <Form>
                     <FormItem>
                         <Select style={{fontSize: "large"}}

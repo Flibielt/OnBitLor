@@ -89,7 +89,7 @@ class TestResultList extends Component{
                     return { value: test.id, display: test.name};
                 });
                 this.setState({
-                    competitions: [{
+                    tests: [{
                         value: 0,
                         display: "Select a test"
                     }].concat(tests)
@@ -118,9 +118,6 @@ class TestResultList extends Component{
     render() {
         return (
             <div className="container">
-                <h1 className="title">
-                    Test results
-                </h1>
                 <Form>
                     <FormItem>
                         <Select style={{fontSize: "large"}}
@@ -138,7 +135,7 @@ class TestResultList extends Component{
                 </Form>
                 {this.state.resultViews}
                 {
-                    !this.state.isLoading && this.state.competitions.length === 0 ? (
+                    !this.state.isLoading && this.state.tests.length === 0 ? (
                         <div className="nothing-found">
                             <span>No Test results Found.</span>
                         </div>
