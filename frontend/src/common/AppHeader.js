@@ -4,7 +4,6 @@ import {
     withRouter
 } from 'react-router-dom';
 import './AppHeader.css';
-import pollIcon from '../poll.svg';
 import { Layout, Menu, Dropdown, Icon } from 'antd';
 const Header = Layout.Header;
     
@@ -31,7 +30,7 @@ class AppHeader extends Component {
             </Menu.Item>,
             <Menu.Item key="/stat">
             <Link to="/stat">
-              <img src={pollIcon} alt="stat" className="poll-icon" />
+                <Icon type="bar-chart" className="nav-icon" />
             </Link>
           </Menu.Item>,
           <Menu.Item key="/profile" className="profile-menu">
