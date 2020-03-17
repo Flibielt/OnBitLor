@@ -204,7 +204,7 @@ class NewProgramming extends Component{
                 validateStatus: 'error',
                 errorMsg: `Description is too short (Minimum 3 characters needed.)`
             }
-        } else if (description.length > 1000) {
+        } else if (description.length > 10000) {
             return {
                 validationStatus: 'error',
                 errorMsg: `Description is too long (Maximum 1000 characters allowed.)`
