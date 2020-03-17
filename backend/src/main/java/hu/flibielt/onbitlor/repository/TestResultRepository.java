@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.ArrayList;
 
-public interface TestResultRepository extends JpaRepository<TestResult, TestResultId> {
+public interface TestResultRepository extends JpaRepository<TestResult, Long> {
     @Query("SELECT t from TestResult t WHERE t.test.id = :testId ORDER BY t.result DESC")
     ArrayList<TestResult> findAllByTestIdOrderByResultDesc(@Param("testId") Long testId);
 }

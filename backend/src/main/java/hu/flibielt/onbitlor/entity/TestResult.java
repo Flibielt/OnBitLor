@@ -10,15 +10,15 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "test_results")
-@IdClass(TestResultId.class)
 public class TestResult {
 
     @Id
+    private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "player_id")
     private Player player;
 
-    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "test_id")
     private Test test;

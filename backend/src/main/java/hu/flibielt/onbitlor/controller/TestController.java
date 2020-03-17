@@ -55,11 +55,11 @@ public class TestController {
         testResultDto.setTest(testService.findByName(request.getName()).getId());
         testResultDto.setPlayer(currentUser.getId());
         testResultDto.setResult(request.getScore());
-        testResultService.save(testResultDto);
+        TestResultDto saved = testResultService.save(testResultDto);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{testId}")
-                .buildAndExpand(testResultDto.getTest()).toUri();
+                .buildAndExpand(saved.getId()).toUri();
 
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "Test result successfully saved"));
@@ -79,8 +79,8 @@ public class TestController {
 
     @GetMapping("/result/{id}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public TestResultDto findResultById(@CurrentUser UserPrincipal userPrincipal, @PathVariable(value = "id") Long id) {
-        return testResultService.findById(userPrincipal.getId(), id);
+    public TestResultDto findResultById(@PathVariable(value = "id") Long id) {
+        return testResultService.findById(id);
     }
 
     @GetMapping("/results/{name}")

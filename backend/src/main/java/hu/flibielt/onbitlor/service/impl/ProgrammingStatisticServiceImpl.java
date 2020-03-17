@@ -10,7 +10,6 @@ import hu.flibielt.onbitlor.repository.PlayerRepository;
 import hu.flibielt.onbitlor.repository.ProgrammingRepository;
 import hu.flibielt.onbitlor.repository.ProgrammingStatisticRepository;
 import hu.flibielt.onbitlor.service.ProgrammingStatisticService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +37,9 @@ public class ProgrammingStatisticServiceImpl implements ProgrammingStatisticServ
 
         assert request != null;
         ProgrammingStatistic saved = programmingStatisticRepository.save(request);
+        Player player = playerRepository.getOne(request.getPlayer().getId());
+        player.setBit(player.getBit() + request.getProgramming().getBit() * request.getScore());
+        playerRepository.save(player);
         return convertToDto(saved);
     }
 

@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class TestResultDto {
-
+    private Long id;
     private Long player;
     private Long test;
     private Date date;
