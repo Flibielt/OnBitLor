@@ -42,11 +42,11 @@ CREATE TABLE `tests` (
 );
 
 CREATE TABLE `test_results` (
+  `id` int PRIMARY KEY,
   `player_id` int,
   `test_id` int,
   `date` datetime NOT NULL,
-  `result` long,
-  PRIMARY KEY (`player_id`, `test_id`)
+  `result` long
 );
 
 ALTER TABLE `programming_statistics` ADD FOREIGN KEY (`programming_id`) REFERENCES `programming` (`id`);

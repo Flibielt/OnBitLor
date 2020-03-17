@@ -16,4 +16,4 @@ insert into user_roles values(1, 3);
 insert into user_roles values(2, 1);
 
 insert into programming_statistics values(4, 1, 1, '2020-03-17 22:09:47', 10);
-insert into test_results values(1, 1, '2020-03-17 22:09:59', 15);
+insert into test_results values(1, 1, 1, '2020-03-17 22:09:59', 15);
