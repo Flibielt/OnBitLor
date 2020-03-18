@@ -117,9 +117,6 @@ class NewProgrammingResult extends Component {
                             <div>
                                 {this.state.validationError}
                             </div>
-                            <div>
-                                {this.state.description}
-                            </div>
                         </FormItem>
                         <FormItem>
                             <TextArea
